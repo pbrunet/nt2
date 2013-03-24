@@ -15,7 +15,7 @@
 #include <nt2/include/functions/ndims.hpp>
 #include <nt2/include/functions/value.hpp>
 #include <nt2/core/container/dsl/size.hpp>
-#include <nt2/core/container/table/category.hpp>
+#include <nt2/sdk/memory/category.hpp>
 #include <boost/proto/traits.hpp>
 #include <boost/assert.hpp>
 

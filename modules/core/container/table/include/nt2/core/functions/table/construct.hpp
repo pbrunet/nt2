@@ -13,7 +13,7 @@
 #include <nt2/core/functions/construct.hpp>
 #include <nt2/dsl/functions/terminal.hpp>
 #include <nt2/include/functions/numel.hpp>
-#include <nt2/core/container/table/category.hpp>
+#include <nt2/sdk/memory/category.hpp>
 #include <boost/simd/sdk/memory/iterator.hpp>
 #include <nt2/sdk/memory/copy.hpp>
 
