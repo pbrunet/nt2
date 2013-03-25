@@ -22,6 +22,9 @@
 #include <boost/fusion/include/make_vector.hpp>
 #include <boost/fusion/include/adapt_struct.hpp>
 
+#include "local_semantic.hpp"
+#include "local_io.hpp"
+
 struct foo
 {
   double d; float f; short c;
@@ -41,7 +44,7 @@ NT2_TEST_CASE_TPL( container_dynamic_default_ctor, DIMS)
   using nt2::of_size_;
   using nt2::memory::container;
 
-  container<foo,settings(T,deinterleaved_)> b;
+  container<foo,settings(T,deinterleaved_),some_semantic_> b;
 
   NT2_TEST(b.empty());
   NT2_TEST_EQUAL(b.size()             , 0u );
@@ -60,7 +63,7 @@ NT2_TEST_CASE( container_static_default_ctor )
   using nt2::settings;
   using nt2::memory::container;
 
-  typedef container<foo,settings(of_size_<3,7>,deinterleaved_)> type;
+  typedef container<foo,settings(of_size_<3,7>,deinterleaved_),some_semantic_> type;
   type b;
 
   NT2_TEST(!b.empty());
@@ -95,7 +98,7 @@ NT2_TEST_CASE( container_automatic_static_default_ctor )
   using nt2::settings;
   using nt2::memory::container;
 
-  typedef container<foo,settings(of_size_<3,7>, automatic_,deinterleaved_)> type;
+  typedef container<foo,settings(of_size_<3,7>, automatic_,deinterleaved_),some_semantic_> type;
   type b;
 
   NT2_TEST(!b.empty());
@@ -128,7 +131,7 @@ NT2_TEST_CASE( container_size_ctor )
   using nt2::deinterleaved_;
   using nt2::memory::container;
 
-  typedef container<foo,settings(deinterleaved_)> type;
+  typedef container<foo,settings(deinterleaved_),some_semantic_> type;
   type b( of_size(3,7) );
 
   NT2_TEST(!b.empty());
@@ -160,7 +163,7 @@ NT2_TEST_CASE( container_copy_ctor )
   using nt2::deinterleaved_;
   using nt2::memory::container;
 
-  typedef container<foo,settings(deinterleaved_)> type;
+  typedef container<foo,settings(deinterleaved_),some_semantic_> type;
   type b( of_size(3,7) );
 
   for(type::difference_type j=0;j<7;++j)
@@ -195,7 +198,7 @@ NT2_TEST_CASE( automatic_container_copy_ctor )
   using nt2::settings;
   using nt2::memory::container;
 
-  typedef container<foo,settings(of_size_<3,7>,deinterleaved_, automatic_)> type;
+  typedef container<foo,settings(of_size_<3,7>,deinterleaved_, automatic_),some_semantic_> type;
   type b;
 
   for(type::difference_type j=0;j<7;++j)
@@ -229,7 +232,7 @@ NT2_TEST_CASE_TPL( container_assignment, DIMS)
   using nt2::deinterleaved_;
   using nt2::memory::container;
 
-  typedef container<foo,settings(deinterleaved_)> type;
+  typedef container<foo,settings(deinterleaved_),some_semantic_> type;
   type b( of_size(3,5) );
 
   for(type::difference_type j=0;j<5;++j)
@@ -266,7 +269,7 @@ NT2_TEST_CASE_TPL( automatic_container_assignment, DIMS)
   using nt2::deinterleaved_;
   using nt2::memory::container;
 
-  typedef container<foo,settings(deinterleaved_,of_size_<3,5>)> type;
+  typedef container<foo,settings(deinterleaved_,of_size_<3,5>),some_semantic_> type;
   type b;
 
   for(type::difference_type j=0;j<5;++j)
@@ -303,7 +306,7 @@ NT2_TEST_CASE( container_swap )
   using nt2::settings;
   using nt2::memory::container;
 
-  typedef container<foo,settings(deinterleaved_)> type;
+  typedef container<foo,settings(deinterleaved_),some_semantic_> type;
   type b( of_size(5,3) );
 
   for(type::difference_type j=0;j<3;++j)
@@ -358,7 +361,7 @@ NT2_TEST_CASE( container_resize )
   using nt2::of_size_;
   using nt2::memory::container;
 
-  typedef container<foo,settings(deinterleaved_)> type;
+  typedef container<foo,settings(deinterleaved_),some_semantic_> type;
   type b;
 
   NT2_TEST(b.empty());
