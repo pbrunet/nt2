@@ -9,20 +9,10 @@
 #ifndef NT2_SDK_META_CONTAINER_OF_HPP_INCLUDED
 #define NT2_SDK_META_CONTAINER_OF_HPP_INCLUDED
 
-namespace nt2
+namespace nt2 { namespace meta
 {
-  namespace meta
-  {
-    //==========================================================================
-    /*!
-     * Returns meta-function class to build a container in particular domain
-     *
-     * \tparam Domain Domain to find the container type for
-     */
-    //==========================================================================
-    template<class Domain>
-    struct container_of;
-  }
-}
+  /// TO BE REMOVED
+  template<typename Domain> struct container_of;
+} }
 
 #endif

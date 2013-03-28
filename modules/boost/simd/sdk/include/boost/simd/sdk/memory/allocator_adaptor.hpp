@@ -39,7 +39,8 @@ namespace boost { namespace simd {  namespace memory
 
     template<class U> struct rebind
     {
-      typedef allocator_adaptor<U,Allocator> other;
+      typedef typename Allocator::template rebind<U>::other base;
+      typedef allocator_adaptor<U,base> other;
     };
 
     ////////////////////////////////////////////////////////////////////////////

@@ -14,7 +14,6 @@
 #include <nt2/core/container/table/adapted/table.hpp>
 #include <nt2/include/functions/construct.hpp>
 #include <nt2/sdk/memory/container.hpp>
-#include <nt2/sdk/memory/category.hpp>
 
 // Disable the 'class : multiple assignment operators specified' warning
 #if defined(BOOST_MSVC)
@@ -26,13 +25,14 @@ namespace nt2 { namespace container
 {
   template<typename T, typename S>
   struct  table
+<<<<<<< HEAD
         : expression< boost::proto::basic_expr< boost::proto::tag::terminal
-                                              , boost::proto::term< nt2::memory::container<T,S> >
+                                              , boost::proto::term< nt2::memory::container<T,S,tag::table_> >
                                               >
                     , nt2::memory::container<T,S>
                     >
   {
-    typedef memory::container<T,S>                                container_type;
+    typedef memory::container<T,S,tag::table_>                   container_type;
     typedef expression< boost::proto::basic_expr< boost::proto::tag::terminal
                                                 , boost::proto::term<container_type>
                                                  >

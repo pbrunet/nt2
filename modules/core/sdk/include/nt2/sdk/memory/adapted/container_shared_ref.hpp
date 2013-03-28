@@ -77,18 +77,17 @@ namespace boost { namespace dispatch { namespace meta
     typedef typename semantic_t::template apply<T,S,Origin>::type type;
   };
 
-  template<class T, class S>
-  struct terminal_of_shared< nt2::memory::container<T, S> >
+  template<typename T, typename S, typename Sema>
+  struct terminal_of_shared< nt2::memory::container<T, S,Sema> >
   {
-    typedef nt2::memory::container<T, S>                        container;
-    typedef nt2::memory::container_shared_ref<T, S, true>       container_ref;
+    typedef nt2::memory::container<T, S, Sema>                    container;
+    typedef nt2::memory::container_shared_ref<T, S, Sema, true>   container_ref;
     typedef boost::proto::basic_expr< boost::proto::tag::terminal
                                     , boost::proto::term<container_ref>
                                     , 0
-                                    >                           basic_expr;
-    typedef nt2::container::expression< basic_expr
-                                      , container&
-                                      >                         type;
+                                    >                             basic_expr;
+    typedef nt2::container::expression< basic_expr, container&>   type;
+
     static type make()
     {
       return type(basic_expr::make(container_ref()));
