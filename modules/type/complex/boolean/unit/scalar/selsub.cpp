@@ -33,7 +33,7 @@ NT2_TEST_CASE_TPL ( selsub_real__2_0,  NT2_REAL_TYPES)
 
   typedef std::complex<T> cT;
   NT2_TEST_TYPE_IS( typename nt2::meta::call<selsub_(logical<T>, cT, cT)>::type
-                  , cT
+                   , cT
                   );
 
   // specific values tests
