@@ -18,6 +18,7 @@
 #include <iostream>
 #include <nt2/sdk/unit/stats.hpp>
 #include <nt2/sdk/unit/details/expr_type.hpp>
+#include <nt2/sdk/meta/type_id.hpp>
 #include <boost/dispatch/preprocessor/strip.hpp>
 
 /// INTERNAL ONLY

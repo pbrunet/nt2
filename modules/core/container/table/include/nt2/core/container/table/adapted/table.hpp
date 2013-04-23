@@ -11,33 +11,34 @@
 
 #include <nt2/core/container/dsl/forward.hpp>
 #include <nt2/core/container/table/semantic.hpp>
+#include <nt2/core/settings/add_settings.hpp>
 #include <nt2/core/settings/option.hpp>
-#include <nt2/sdk/memory/forward/container.hpp>
-#include <nt2/sdk/meta/is_container.hpp>
-#include <nt2/sdk/meta/container_of.hpp>
+#include <nt2/sdk/meta/settings_of.hpp>
+
 #include <boost/dispatch/meta/model_of.hpp>
 #include <boost/dispatch/meta/value_of.hpp>
 
 namespace nt2 { namespace meta
 {
-  /// TO BE REMOVED
-  template<>
-  struct container_of<container::domain>
-  {
-    struct type
-    {
-      template<class T, class S> struct apply
-      {
-        typedef memory::container<T,S,tag::table_> type;
-      };
-    };
-  };
-
   /// INTERNAL ONLY : Option of a table use its settings and semantic
   template<typename T, typename S, typename Tag>
   struct  option<nt2::container::table<T, S> , Tag>
         : option<S, Tag, tag::table_>
   {};
+
+  /// INTERNAL ONLY : add_settings to a table
+  template<typename T, typename S, typename S2>
+  struct add_settings< container::table<T, S>, S2 >
+  {
+    typedef container::table<T, typename add_settings<S, S2>::type> type;
+  };
+
+  /// INTERNAL ONLY : Extract settings from table
+  template<typename T, typename S>
+  struct settings_of< container::table<T, S> >
+  {
+    typedef S type;
+  };
 } }
 
 namespace boost { namespace dispatch { namespace meta
@@ -53,8 +54,7 @@ namespace boost { namespace dispatch { namespace meta
   {
     struct type
     {
-      template<class X>
-      struct apply { typedef nt2::container::table<X,S> type; };
+      template<class X> struct apply { typedef nt2::container::table<X,S> type; };
     };
   };
 

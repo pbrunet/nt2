@@ -25,7 +25,7 @@
 #include <nt2/core/container/dsl/forward.hpp>
 #include <nt2/sdk/memory/container.hpp>
 #include <nt2/sdk/memory/container_shared_ref.hpp>
-#include <nt2/sdk/meta/add_settings.hpp>
+#include <nt2/core/settings/add_settings.hpp>
 #include <nt2/sdk/meta/as_index.hpp>
 #include <boost/simd/sdk/meta/is_logical.hpp>
 #include <boost/utility/enable_if.hpp>

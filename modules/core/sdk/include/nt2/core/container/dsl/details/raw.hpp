@@ -41,16 +41,16 @@ namespace nt2 { namespace details
 
   template<typename T, typename S, typename Sema, bool Own>
   BOOST_FORCEINLINE
-  typename memory::container_shared_ref<T,S,Sema>,Own>::pointer
-  raw(memory::container_shared_ref<T,S,Sema>, Own> const& c)
+  typename memory::container_shared_ref<T,S,Sema,Own>::pointer
+  raw(memory::container_shared_ref<T,S,Sema, Own> const& c)
   {
     return c.raw();
   }
 
   template<typename T, typename S, typename Sema, bool Own>
   BOOST_FORCEINLINE
-  typename memory::container_shared_ref<T,S,Sema>,Own>::pointer
-  raw(memory::container_shared_ref<T,S,Sema>, Own>& c)
+  typename memory::container_shared_ref<T,S,Sema,Own>::pointer
+  raw(memory::container_shared_ref<T,S,Sema, Own>& c)
   {
     return c.raw();
   }

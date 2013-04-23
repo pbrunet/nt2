@@ -20,7 +20,7 @@
 #include <nt2/sdk/meta/container_traits.hpp>
 #include <nt2/sdk/meta/settings_of.hpp>
 #include <nt2/sdk/meta/is_scalar.hpp>
-//#include <nt2/core/functions/function.hpp>
+#include <nt2/core/functions/function.hpp>
 #include <nt2/core/functions/extent.hpp>
 #include <nt2/operator/functions/assign.hpp>
 #include <nt2/include/functions/evaluate.hpp>
@@ -104,6 +104,8 @@ namespace nt2 { namespace container
     typedef typename meta::pointer_<Result>::type           pointer;
     typedef typename meta::const_pointer_<Result>::type     const_pointer;
     typedef typename meta::size_type_<Result>::type         size_type;
+
+    typedef typename meta::settings_of<Result>::type        settings_type;
 
     typedef typename meta::option < Result
                                   , nt2::tag::index_
@@ -235,7 +237,7 @@ namespace nt2 { namespace container
     }                                                                 \
     /**/
 
-    //BOOST_PP_REPEAT_FROM_TO(1,BOOST_PP_INC(NT2_MAX_DIMENSIONS),M0,~)
+    BOOST_PP_REPEAT_FROM_TO(1,BOOST_PP_INC(NT2_MAX_DIMENSIONS),M0,~)
     #undef M0
     #undef M1
     #undef M2

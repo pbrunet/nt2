@@ -39,7 +39,7 @@ namespace nt2 { namespace memory
     @tparam semantic Describe the behavior of the container
   **/
   template<class Type, class Settings, class Semantic>
-  class container
+  struct container : public container_base<Type>
   {
     public:
 

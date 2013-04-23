@@ -12,6 +12,7 @@
 #include <nt2/core/container/dsl/forward.hpp>
 #include <nt2/sdk/memory/container_ref.hpp>
 #include <nt2/sdk/memory/container_shared_ref.hpp>
+#include <nt2/core/container/table/adapted/table_view.hpp>
 #include <boost/dispatch/dsl/semantic_of.hpp>
 #include <boost/config.hpp>
 
@@ -24,29 +25,28 @@ namespace nt2 { namespace container
 {
   /* table_view; an expression of a container_ref terminal.
    * allows construction from an expression of a container terminal */
-  template<class T, class S = nt2::settings()>
+  template<typename T, typename S>
   struct table_view
-       : expression< boost::proto::basic_expr< boost::proto::tag::terminal, boost::proto::term< memory::container_ref<T, S> >, 0l >
-                   , memory::container<T, S>&
+       : expression< boost::proto::basic_expr < boost::proto::tag::terminal
+                                              , boost::proto::term< memory::container_ref<T, S, tag::table_> >
+                                              , 0l
+                                              >
+                   , memory::container<T, S, tag::table_>&
                    >
   {
-    typedef memory::container_ref<T, S> container_ref;
-    typedef boost::proto::basic_expr< boost::proto::tag::terminal, boost::proto::term<container_ref>, 0l > basic_expr;
-    typedef memory::container<T, S>& semantic;
-    typedef expression<basic_expr, semantic> nt2_expression;
+    typedef memory::container_ref<T, S, tag::table_>             container_ref;
+    typedef boost::proto::basic_expr< boost::proto::tag::terminal
+                                    , boost::proto::term<container_ref>
+                                    , 0l
+                                    >               basic_expr;
+    typedef memory::container<T, S, tag::table_>&                container_type;
+    typedef expression<basic_expr, container_type>  nt2_expression;
 
-    typedef typename container_ref::iterator iterator;
-    typedef typename container_ref::const_iterator const_iterator;
+    typedef typename container_ref::iterator        iterator;
+    typedef typename container_ref::const_iterator  const_iterator;
 
-    iterator begin() const
-    {
-      return boost::proto::value(*this).begin();
-    }
-
-    iterator end() const
-    {
-      return boost::proto::value(*this).end();
-    }
+    iterator begin()  const { return boost::proto::value(*this).begin(); }
+    iterator end()    const { return boost::proto::value(*this).end(); }
 
     BOOST_FORCEINLINE
     table_view()
@@ -60,8 +60,11 @@ namespace nt2 { namespace container
     }
 
     BOOST_FORCEINLINE
-    table_view( expression< boost::proto::basic_expr< boost::proto::tag::terminal, boost::proto::term< memory::container<T, S> >, 0l >
-                          , memory::container<T, S>
+    table_view( expression< boost::proto::basic_expr< boost::proto::tag::terminal
+                                                    , boost::proto::term< memory::container<T, S, tag::table_> >
+                                                    , 0l
+                                                    >
+                          , memory::container<T, S, tag::table_>
                           > & expr
               )
               : nt2_expression(basic_expr::make(boost::proto::value(expr)))
@@ -69,15 +72,18 @@ namespace nt2 { namespace container
     }
 
     BOOST_FORCEINLINE
-    table_view( expression< boost::proto::basic_expr< boost::proto::tag::terminal, boost::proto::term< memory::container<T, S>& >, 0l >
-                          , memory::container<T, S>&
+    table_view( expression< boost::proto::basic_expr< boost::proto::tag::terminal
+                                                    , boost::proto::term< memory::container<T, S, tag::table_>& >
+                                                    , 0l
+                                                    >
+                          , memory::container<T, S, tag::table_>&
                           > const& expr
               )
               : nt2_expression(basic_expr::make(boost::proto::value(expr)))
     {
     }
 
-    template<class S2>
+    template<typename S2>
     BOOST_FORCEINLINE
     table_view( table_view<T, S2> const& expr )
               : nt2_expression(basic_expr::make(boost::proto::value(expr)))
@@ -87,29 +93,36 @@ namespace nt2 { namespace container
     using nt2_expression::operator=;
   };
 
-  template<class T, class S>
+  template<typename T, typename S>
   struct table_view<T const, S>
-       : expression< boost::proto::basic_expr< boost::proto::tag::terminal, boost::proto::term< memory::container_ref<T const, S> >, 0l >
-                   , memory::container<T, S> const&
+       : expression< boost::proto::basic_expr < boost::proto::tag::terminal
+                                              , boost::proto::term< memory::container_ref < T const
+                                                                                          , S
+                                                                                          , tag::table_
+                                                                                          >
+                                                                  >
+                                              , 0l
+                                              >
+                   , memory::container<T, S, tag::table_> const&
                    >
   {
-    typedef memory::container_ref<T const, S> container_ref;
-    typedef boost::proto::basic_expr< boost::proto::tag::terminal, boost::proto::term<container_ref>, 0l > basic_expr;
-    typedef memory::container<T, S> const& semantic;
-    typedef expression<basic_expr, semantic> nt2_expression;
+    typedef memory::container_ref<T const, S, tag::table_>       container_ref;
+    typedef boost::proto::basic_expr< boost::proto::tag::terminal
+                                    , boost::proto::term< memory::container_ref < T const
+                                                                                , S
+                                                                                , tag::table_
+                                                                                >
+                                                        >
+                                    , 0l
+                                    >               basic_expr;
+    typedef memory::container<T, S, tag::table_> const&          container_type;
+    typedef expression<basic_expr, container_type>  nt2_expression;
 
-    typedef typename container_ref::iterator iterator;
-    typedef typename container_ref::const_iterator const_iterator;
+    typedef typename container_ref::iterator        iterator;
+    typedef typename container_ref::const_iterator  const_iterator;
 
-    iterator begin() const
-    {
-      return boost::proto::value(*this).begin();
-    }
-
-    iterator end() const
-    {
-      return boost::proto::value(*this).end();
-    }
+    iterator begin()  const { return boost::proto::value(*this).begin();  }
+    iterator end()    const { return boost::proto::value(*this).end();    }
 
     BOOST_FORCEINLINE
     table_view()
@@ -123,8 +136,11 @@ namespace nt2 { namespace container
     }
 
     BOOST_FORCEINLINE
-    table_view( expression< boost::proto::basic_expr< boost::proto::tag::terminal, boost::proto::term< memory::container<T, S> >, 0l >
-                          , memory::container<T, S>
+    table_view( expression< boost::proto::basic_expr< boost::proto::tag::terminal
+                                                    , boost::proto::term< memory::container<T, S, tag::table_> >
+                                                    , 0l
+                                                    >
+                          , memory::container<T, S, tag::table_>
                           > const& expr
               )
               : nt2_expression(basic_expr::make(boost::proto::value(expr)))
@@ -132,15 +148,22 @@ namespace nt2 { namespace container
     }
 
     BOOST_FORCEINLINE
-    table_view( expression< boost::proto::basic_expr< boost::proto::tag::terminal, boost::proto::term< memory::container<T, S> const& >, 0l >
-                          , memory::container<T, S> const&
+    table_view( expression< boost::proto::basic_expr< boost::proto::tag::terminal
+                                                    , boost::proto::term< memory::container < T
+                                                                                            , S
+                                                                                            , tag::table_
+                                                                                            > const&
+                                                                        >
+                                                    , 0l
+                                                    >
+                          , memory::container<T, S, tag::table_> const&
                           > const& expr
               )
               : nt2_expression(basic_expr::make(boost::proto::value(expr)))
     {
     }
 
-    template<class U, class S2>
+    template<typename U, typename S2>
     BOOST_FORCEINLINE
     table_view( table_view<U, S2> const& expr )
               : nt2_expression(basic_expr::make(boost::proto::value(expr)))
@@ -149,130 +172,8 @@ namespace nt2 { namespace container
 
     using nt2_expression::operator=;
   };
-
-  /* table_shared_view; an expression of a container_shared_ref terminal.
-   * allows construction from an expression of a container_shared_ref terminal */
-  template<class T, class S = nt2::settings()>
-  struct table_shared_view
-       : expression< boost::proto::basic_expr< boost::proto::tag::terminal, boost::proto::term< memory::container_shared_ref< T, S, false > >, 0l >
-                   , memory::container<T, S>&
-                   >
-  {
-    typedef memory::container_shared_ref< T, S, false > container_ref;
-    typedef boost::proto::basic_expr< boost::proto::tag::terminal, boost::proto::term<container_ref>, 0l > basic_expr;
-    typedef memory::container<T, S>& semantic;
-    typedef expression<basic_expr, semantic> nt2_expression;
-
-    typedef typename container_ref::iterator iterator;
-    typedef typename container_ref::const_iterator const_iterator;
-
-    iterator begin() const
-    {
-      return boost::proto::value(*this).begin();
-    }
-
-    iterator end() const
-    {
-      return boost::proto::value(*this).end();
-    }
-
-    BOOST_FORCEINLINE
-    table_shared_view()
-    {
-    }
-
-    BOOST_FORCEINLINE
-    table_shared_view( nt2_expression const& expr )
-                     : nt2_expression(expr)
-    {
-    }
-
-    template<class S2, bool Own>
-    BOOST_FORCEINLINE
-    table_shared_view( expression< boost::proto::basic_expr< boost::proto::tag::terminal, boost::proto::term< memory::container_shared_ref< T, S2, Own > >, 0l >
-                                 , memory::container<T, S2>&
-                                 > const& expr
-                     )
-                     : nt2_expression(basic_expr::make(boost::proto::value(expr)))
-    {
-    }
-
-    using nt2_expression::operator=;
-  };
-
-  template<class T, class S>
-  struct table_shared_view<T const, S>
-       : expression< boost::proto::basic_expr< boost::proto::tag::terminal, boost::proto::term< memory::container_shared_ref< T const, S, false > >, 0l >
-                   , memory::container<T, S> const&
-                   >
-  {
-    typedef memory::container_shared_ref< T const, S, false > container_ref;
-    typedef boost::proto::basic_expr< boost::proto::tag::terminal, boost::proto::term<container_ref>, 0l > basic_expr;
-    typedef memory::container<T, S> const& semantic;
-    typedef expression<basic_expr, semantic> nt2_expression;
-
-    typedef typename container_ref::iterator iterator;
-    typedef typename container_ref::const_iterator const_iterator;
-
-    iterator begin() const
-    {
-      return boost::proto::value(*this).begin();
-    }
-
-    iterator end() const
-    {
-      return boost::proto::value(*this).end();
-    }
-
-    BOOST_FORCEINLINE
-    table_shared_view()
-    {
-    }
-
-    BOOST_FORCEINLINE
-    table_shared_view( nt2_expression const& expr )
-                     : nt2_expression(expr)
-    {
-    }
-
-    template<class U, class S2, bool Own>
-    BOOST_FORCEINLINE
-    table_shared_view( expression< boost::proto::basic_expr< boost::proto::tag::terminal, boost::proto::term< memory::container_shared_ref< U, S2, Own > >, 0l >
-                                 , memory::container<U, S2> /*const?*/&
-                                 > const& expr
-                     )
-                     : nt2_expression(basic_expr::make(boost::proto::value(expr)))
-    {
-    }
-
-    using nt2_expression::operator=;
-  };
-
 } }
 
-#if defined(BOOST_MSVC)
-#pragma warning( pop )
-#endif
-
-namespace boost { namespace dispatch { namespace meta
-{
-  template<class T, class S>
-  struct semantic_of< nt2::container::table_view<T, S> >
-  {
-    typedef typename nt2::container::table_view<T, S>::semantic type;
-  };
-
-  template<class T, class S>
-  struct semantic_of< nt2::container::table_shared_view<T, S> >
-  {
-    typedef typename nt2::container::table_shared_view<T, S>::semantic type;
-  };
-} } }
-
-namespace nt2
-{
-  using nt2::container::table_view;
-  using nt2::container::table_shared_view;
-}
+namespace nt2 { using nt2::container::table_view; }
 
 #endif
