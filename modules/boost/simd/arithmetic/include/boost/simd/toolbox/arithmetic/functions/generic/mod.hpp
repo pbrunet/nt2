@@ -10,7 +10,6 @@
 #define BOOST_SIMD_TOOLBOX_ARITHMETIC_FUNCTIONS_GENERIC_MOD_HPP_INCLUDED
 #include <boost/simd/toolbox/arithmetic/functions/mod.hpp>
 #include <boost/simd/include/functions/simd/selsub.hpp>
-#include <boost/simd/include/functions/simd/if_else.hpp>
 #include <boost/simd/include/functions/simd/is_nez.hpp>
 #include <boost/simd/include/functions/simd/divfloor.hpp>
 #include <boost/simd/include/functions/simd/idivfloor.hpp>
@@ -45,7 +44,7 @@ namespace boost { namespace simd { namespace ext
     {
       return boost::simd::selsub(boost::simd::is_nez(a1),
                                  a0,
-                                 boost::simd::idivfloor(a0,a1)*a1
+                                 boost::simd::multiplies(boost::simd::idivfloor(a0,a1), a1)
                                 );
 
     }

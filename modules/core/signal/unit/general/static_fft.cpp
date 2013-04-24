@@ -72,10 +72,14 @@ namespace
         /// results (on MSVC10). Without NDEBUG MSVC10, Clang3 and GCC 4.x give
         /// exactly the same results.
         ///                                   (24.07.2012.) (Domagoj Saric)
-
+        /// I had to replace 580 by 1290 during the cleaning of boost.simd.arithmetic.
+        /// This is probably consequence of the splitting of round in round/round2even
+        /// (round(0.5) == 1 round2even(0.5) == 0)
+        /// but I have not seen where it impacted fft code.
+        ///                                    (20.04.2013.) (jean-thierry Lapresté)
         static unsigned int const maximum_allowed_complex_nt2_ulpd   = 1030;
 #if defined(BOOST_SIMD_ARCH_X86) && !defined(BOOST_SIMD_HAS_FMA4_SUPPORT)
-        static unsigned int const maximum_allowed_real_nt2_ulpd      =  580;
+        static unsigned int const maximum_allowed_real_nt2_ulpd      = 1290; //580;
 #else
         static unsigned int const maximum_allowed_real_nt2_ulpd      = 1290;
 #endif

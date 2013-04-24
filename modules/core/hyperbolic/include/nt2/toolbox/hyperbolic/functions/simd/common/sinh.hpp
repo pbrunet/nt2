@@ -19,7 +19,7 @@
 #include <nt2/include/functions/simd/average.hpp>
 #include <nt2/include/functions/simd/if_else.hpp>
 #include <nt2/include/functions/simd/is_eqz.hpp>
-
+#include <nt2/include/constants/sqrteps.hpp>
 namespace nt2 { namespace ext
 {
   NT2_FUNCTOR_IMPLEMENTATION( nt2::tag::sinh_, tag::cpu_
@@ -32,7 +32,7 @@ namespace nt2 { namespace ext
 
     NT2_FUNCTOR_CALL(1)
     {
-      return sinh(tofloat(a0));
+      return nt2::sinh(nt2::tofloat(a0));
     }
   };
 } }
@@ -72,6 +72,8 @@ namespace nt2 { namespace ext
       const result_type tmp=nt2::expm1(nt2::abs(a0));
       result_type r = if_else(eq(tmp, Inf<result_type>()), tmp, nt2::average(tmp, tmp/(oneplus(tmp))));
       return negif(is_negative(a0), r);
+//       const result_type z = nt2::exp(a0);
+//       return nt2::if_else(lt(nt2::abs(a0), nt2::Sqrteps<result_type>()), a0, nt2::average(z, -nt2::rec(z)));
     }
   };
 } }

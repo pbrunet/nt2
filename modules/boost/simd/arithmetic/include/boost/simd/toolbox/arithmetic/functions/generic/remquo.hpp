@@ -9,7 +9,7 @@
 #ifndef BOOST_SIMD_TOOLBOX_ARITHMETIC_FUNCTIONS_GENERIC_REMQUO_HPP_INCLUDED
 #define BOOST_SIMD_TOOLBOX_ARITHMETIC_FUNCTIONS_GENERIC_REMQUO_HPP_INCLUDED
 #include <boost/simd/toolbox/arithmetic/functions/remquo.hpp>
-#include <boost/simd/include/functions/simd/round.hpp>
+#include <boost/simd/include/functions/simd/round2even.hpp>
 #include <boost/simd/include/functions/simd/toint.hpp>
 #include <boost/simd/include/functions/simd/minus.hpp>
 #include <boost/simd/include/functions/simd/is_eqz.hpp>
@@ -42,7 +42,7 @@ namespace boost { namespace simd { namespace ext
     typedef A0 result_type;
 
     BOOST_FORCEINLINE
-    result_type operator()(A0 const& a0,A0 const& a1,A1& a3) const
+      result_type operator()(A0 const& a0,A0 const& a1,A1& a3) const
     {
       result_type a2;
       boost::simd::remquo(a0, a1, a2, a3);
@@ -71,30 +71,30 @@ namespace boost { namespace simd { namespace ext
                                       , (A0)(A1)
                                       , ( boost::is_same
                                           < typename dispatch::meta::
-                                                     as_integer<A0,signed>::type
-                                          , A1
+                                          as_integer<A0,signed>::type
+                                        , A1
                                           >
-                                        )
-                                      , (generic_<floating_<A0> >)
-                                        (generic_<floating_<A0> >)
-                                        (generic_<floating_<A0> >)
-                                        (generic_<integer_ <A1> >)
                                       )
+    , (generic_<floating_<A0> >)
+    (generic_<floating_<A0> >)
+    (generic_<floating_<A0> >)
+    (generic_<integer_ <A1> >)
+    )
   {
     typedef void result_type;
 
     BOOST_FORCEINLINE
-    result_type operator()(A0 const& a0, A0 const& a1,A0& a2, A1& a3) const
+      result_type operator()(A0 const& a0, A0 const& a1,A0& a2, A1& a3) const
     {
-      A0 const d = round(a0/a1);
+      A0 const d = round2even(a0/a1);
 
 #if defined(BOOST_SIMD_NO_INVALIDS)
-      a2 = if_allbits_else(is_eqz(a1), a0-d*a1);
+      a2 = boost::simd::if_allbits_else(boost::simd::is_eqz(a1), a0-d*a1);
 #else
-      a2 = if_allbits_else(l_or(is_invalid(a0), is_eqz(a1)), a0-d*a1);
+      a2 = boost::simd::if_allbits_else(l_or(boost::simd::is_invalid(a0), boost::simd::is_eqz(a1)), a0-d*a1);
 #endif
 
-      a3 = toint(d);
+      a3 = boost::simd::toint(d);
     }
   };
 } } }

@@ -12,6 +12,8 @@
 #include <boost/simd/include/functions/simd/abs.hpp>
 #include <boost/simd/include/functions/simd/idivround.hpp>
 #include <boost/simd/include/functions/simd/divround.hpp>
+#include <boost/simd/include/functions/simd/multiplies.hpp>
+#include <boost/simd/include/functions/simd/minus.hpp>
 /////////////////////////////////////////////////////////////////////////////
 // The remainder() function computes the remainder of dividing x by y.  The
 // return value is x-n*y, where n is the value x / y, rounded to the nearest
