@@ -12,6 +12,7 @@
 #include <boost/simd/toolbox/bitwise/functions/clz.hpp>
 #include <boost/simd/include/functions/scalar/ffs.hpp>
 #include <boost/simd/include/functions/scalar/bitwise_cast.hpp>
+#include <boost/simd/include/functions/scalar/reversebits.hpp>
 #include <boost/dispatch/meta/as_integer.hpp>
 #include <boost/assert.hpp>
 
@@ -28,13 +29,13 @@ namespace boost { namespace simd { namespace ext
     typedef typename dispatch::meta::as_integer<A0, unsigned>::type result_type;
     BOOST_SIMD_FUNCTOR_CALL(1)
       {
-        result_type t1 = bitwise_cast<result_type>(a0);
+        result_type t1 = boost::simd::bitwise_cast<result_type>(a0);
         BOOST_ASSERT_MSG( t1, "clz not defined for 0" );
 
       #ifdef __GNUC__
         return __builtin_clzll(t1);
       #else
-        return boost::simd::ffs(reversebits(t1))-1;
+        return boost::simd::ffs(boost::simd::reversebits(t1))-1;
       #endif
       }
   };
@@ -48,13 +49,13 @@ namespace boost { namespace simd { namespace ext
 
     BOOST_SIMD_FUNCTOR_CALL(1)
     {
-      result_type t1 = bitwise_cast<result_type>(a0);
+      result_type t1 = boost::simd::bitwise_cast<result_type>(a0);
       BOOST_ASSERT_MSG( t1, "clz not defined for 0" );
 
     #ifdef __GNUC__
       return __builtin_clz(t1);
     #else
-      return boost::simd::ffs(reversebits(t1))-1;
+      return boost::simd::ffs(boost::simd::reversebits(t1))-1;
      #endif
     }
   };
@@ -68,7 +69,7 @@ namespace boost { namespace simd { namespace ext
 
     BOOST_SIMD_FUNCTOR_CALL(1)
     {
-      result_type t1 = bitwise_cast<result_type>(a0);
+      result_type t1 = boost::simd::bitwise_cast<result_type>(a0);
       return boost::simd::clz(uint32_t(t1))-16;
     }
   };
@@ -82,7 +83,7 @@ namespace boost { namespace simd { namespace ext
 
     BOOST_SIMD_FUNCTOR_CALL(1)
     {
-      result_type t1 = bitwise_cast<result_type>(a0);
+      result_type t1 = boost::simd::bitwise_cast<result_type>(a0);
       return boost::simd::clz(uint32_t(t1))-24;
     }
   };

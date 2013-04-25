@@ -25,7 +25,7 @@ namespace boost { namespace simd { namespace ext
       typedef typename meta::scalar_of<result_type>::type int_type;
       BOOST_STATIC_CONSTANT(int_type, shift = sizeof(int_type)*4);
       BOOST_STATIC_CONSTANT(int_type, pattern = (int_type(int_type(-1)<<shift))>>shift);
-      return b_and(boost::simd::integral_constant<result_type,pattern>(),a0);
+      return boost::simd::bitwise_and(boost::simd::integral_constant<result_type,pattern>(),a0);
     }
   };
 } } }

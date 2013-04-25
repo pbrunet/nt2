@@ -20,19 +20,19 @@
 namespace boost { namespace simd { namespace ext
 {
   BOOST_SIMD_FUNCTOR_IMPLEMENTATION( boost::simd::tag::shri_, tag::cpu_, (A0)(A1)(X)
-                            , ((simd_<arithmetic_<A0>,X>))
-                              (scalar_< integer_<A1> >)
-                            )
+                                   , ((simd_<arithmetic_<A0>,X>))
+                                     (scalar_< integer_<A1> >)
+                                   )
   {
     typedef A0 result_type;
     BOOST_SIMD_FUNCTOR_CALL(2)
     {
       typedef typename dispatch::meta::as_unsigned<A0>::type ntype;
-      return bitwise_cast<A0>( map( typename dispatch::make_functor<tag::shift_right_, A0>::type()
-                                       , simd::bitwise_cast<ntype>(a0)
-                                       , splat<ntype>(a1)
-                                       )
-                                  );
+      return bitwise_cast<A0>( simd::map( typename dispatch::make_functor<tag::shift_right_, A0>::type()
+                                        , simd::bitwise_cast<ntype>(a0)
+                                        , simd::splat<ntype>(a1)
+                                        )
+                             );
     }
   };
 } } }

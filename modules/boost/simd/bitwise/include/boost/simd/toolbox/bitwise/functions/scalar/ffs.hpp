@@ -27,7 +27,7 @@ namespace boost { namespace simd { namespace ext
     typedef typename dispatch::meta::as_integer<A0, unsigned>::type result_type;
     BOOST_SIMD_FUNCTOR_CALL(1)
     {
-      result_type t1 = bitwise_cast<result_type>(a0);
+      result_type t1 = boost::simd::bitwise_cast<result_type>(a0);
 
     #ifdef __GNUC__
       return __builtin_ffsll(t1);
@@ -78,7 +78,7 @@ namespace boost { namespace simd { namespace ext
 
     BOOST_SIMD_FUNCTOR_CALL(1)
     {
-      result_type t1 = bitwise_cast<result_type>(a0);
+      result_type t1 = boost::simd::bitwise_cast<result_type>(a0);
 
     #ifdef __GNUC__
       return __builtin_ffs(t1);
@@ -112,7 +112,7 @@ namespace boost { namespace simd { namespace ext
 
     BOOST_SIMD_FUNCTOR_CALL(1)
     {
-      result_type t1 = bitwise_cast<result_type>(a0);
+      result_type t1 = boost::simd::bitwise_cast<result_type>(a0);
       typedef typename meta::make_dependent<uint32_t, A0>::type itype;
       return boost::simd::ffs(itype(t1));
     }

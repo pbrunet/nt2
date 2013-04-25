@@ -10,6 +10,7 @@
 #define BOOST_SIMD_TOOLBOX_BITWISE_FUNCTIONS_SIMD_COMMON_RROL_HPP_INCLUDED
 #include <boost/simd/toolbox/bitwise/functions/rrol.hpp>
 #include <boost/simd/sdk/meta/cardinal_of.hpp>
+#include <boost/mpl/equal_to.hpp>
 
 namespace boost { namespace simd { namespace ext
 {
@@ -23,7 +24,7 @@ namespace boost { namespace simd { namespace ext
                      )
   {
     typedef A0 result_type;
-    BOOST_SIMD_FUNCTOR_CALL(2) { return map(dispatch::functor<boost::simd::tag::rrol_>(), a0, a1); }
+    BOOST_SIMD_FUNCTOR_CALL(2) { return simd::map(dispatch::functor<boost::simd::tag::rrol_>(), a0, a1); }
   };
 } } }
 

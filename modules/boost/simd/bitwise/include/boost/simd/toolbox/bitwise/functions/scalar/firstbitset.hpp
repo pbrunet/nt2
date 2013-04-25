@@ -23,7 +23,7 @@ namespace boost { namespace simd { namespace ext
     typedef typename dispatch::meta::as_integer<A0, unsigned>::type result_type;
     BOOST_SIMD_FUNCTOR_CALL(1)
     {
-      return a0 & (~a0+One<A0>());
+      return a0 & (~a0+boost::simd::One<A0>());
     }
   };
 
@@ -34,7 +34,7 @@ namespace boost { namespace simd { namespace ext
     typedef typename dispatch::meta::as_integer<A0, unsigned>::type result_type;
     BOOST_SIMD_FUNCTOR_CALL(1)
     {
-      return firstbitset(bitwise_cast<result_type>(a0));
+      return boost::simd::firstbitset(boost::simd::bitwise_cast<result_type>(a0));
     }
   };
 } } }

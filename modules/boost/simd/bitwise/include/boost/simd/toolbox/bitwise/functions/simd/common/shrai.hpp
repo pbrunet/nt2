@@ -17,23 +17,23 @@
 namespace boost { namespace simd { namespace ext
 {
   BOOST_SIMD_FUNCTOR_IMPLEMENTATION( boost::simd::tag::shrai_, tag::cpu_, (A0)(A1)(X)
-                            , ((simd_<unsigned_<A0>,X>))
-                              (scalar_< integer_<A1> >)
-                            )
+                                   , ((simd_<unsigned_<A0>,X>))
+                                     (scalar_< integer_<A1> >)
+                                   )
   {
     typedef A0 result_type;
-    BOOST_SIMD_FUNCTOR_CALL(2) { return shri(a0, a1); }
+    BOOST_SIMD_FUNCTOR_CALL(2) { return simd::shri(a0, a1); }
   };
 
   BOOST_SIMD_FUNCTOR_IMPLEMENTATION( boost::simd::tag::shrai_, tag::cpu_, (A0)(A1)(X)
-                            , ((simd_<signed_<A0>,X>))
-                              (scalar_< integer_<A1> >)
-                            )
+                                   , ((simd_<signed_<A0>,X>))
+                                     (scalar_< integer_<A1> >)
+                                   )
   {
     typedef A0 result_type;
     BOOST_SIMD_FUNCTOR_CALL(2)
     {
-      return map(dispatch::functor<boost::simd::tag::shift_right_>(), a0, splat<A0>(a1));
+      return simd::map(dispatch::functor<boost::simd::tag::shift_right_>(), a0, splat<A0>(a1));
     }
   };
 } } }

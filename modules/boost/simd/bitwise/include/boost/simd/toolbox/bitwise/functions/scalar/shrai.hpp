@@ -15,32 +15,33 @@
 namespace boost { namespace simd { namespace ext
 {
   BOOST_SIMD_FUNCTOR_IMPLEMENTATION( boost::simd::tag::shrai_, tag::cpu_, (A0)(A1)
-                            , (scalar_< arithmetic_<A0> >)
-                              (scalar_< integer_<A1> >)
-                            )
+                                   , (scalar_< arithmetic_<A0> >)
+                                     (scalar_< integer_<A1> >)
+                                   )
   {
     typedef A0 result_type;
     BOOST_SIMD_FUNCTOR_CALL(2) { return a0 >> a1; }
   };
 
   BOOST_SIMD_FUNCTOR_IMPLEMENTATION( boost::simd::tag::shrai_, tag::cpu_, (A0)(A1)
-                            , (scalar_< unsigned_<A0> >)
-                              (scalar_< integer_<A1> >)
-                            )
+                                   , (scalar_< unsigned_<A0> >)
+                                     (scalar_< integer_<A1> >)
+                                   )
   {
     typedef A0 result_type;
     BOOST_SIMD_FUNCTOR_CALL(2) { return a0 >> a1; }
   };
 
   BOOST_SIMD_FUNCTOR_IMPLEMENTATION( boost::simd::tag::shrai_, tag::cpu_, (A0)(A1)
-                            , (scalar_< floating_<A0> >)(scalar_< integer_<A1> >)
-                            )
+                                   , (scalar_< floating_<A0> >)
+                                     (scalar_< integer_<A1> >)
+                                   )
   {
     typedef A0 result_type;
     BOOST_SIMD_FUNCTOR_CALL(2)
     {
       typedef typename dispatch::meta::as_integer<A0, unsigned>::type itype;
-      return bitwise_cast<result_type>(shrai(bitwise_cast<itype>(a0),a1));
+      return simd::bitwise_cast<result_type>(simd::shrai(simd::bitwise_cast<itype>(a0),a1));
     }
   };
 } } }

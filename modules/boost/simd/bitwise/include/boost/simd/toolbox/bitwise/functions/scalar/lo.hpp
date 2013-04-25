@@ -17,8 +17,8 @@ namespace boost { namespace simd { namespace ext
 {
 
   BOOST_SIMD_FUNCTOR_IMPLEMENTATION( boost::simd::tag::lo_, tag::cpu_, (A0)
-                            , (scalar_< arithmetic_<A0> >)
-                            )
+                                   , (scalar_< arithmetic_<A0> >)
+                                   )
 
   {
     typedef typename dispatch::meta::downgrade <
@@ -29,7 +29,7 @@ namespace boost { namespace simd { namespace ext
       typedef typename dispatch::meta::as_integer<A0,unsigned>::type type;
       BOOST_STATIC_CONSTANT(type, shift = sizeof(type)*4);
       BOOST_STATIC_CONSTANT(type, pattern = (type(type(-1)<<shift)>>shift));
-      return static_cast<result_type> (b_and(pattern, a0));
+      return static_cast<result_type> (boost::simd::bitwise_and(pattern, a0));
     }
   };
 } } }

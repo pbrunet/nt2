@@ -12,6 +12,7 @@
 #include <boost/simd/toolbox/bitwise/functions/firstbitset.hpp>
 #include <boost/simd/include/functions/simd/bitwise_cast.hpp>
 #include <boost/simd/include/functions/simd/bitwise_and.hpp>
+#include <boost/simd/include/functions/simd/oneplus.hpp>
 #include <boost/simd/include/functions/simd/complement.hpp>
 #include <boost/simd/include/functions/simd/plus.hpp>
 #include <boost/simd/include/constants/one.hpp>
@@ -21,15 +22,18 @@
 namespace boost { namespace simd { namespace ext
 {
   BOOST_SIMD_FUNCTOR_IMPLEMENTATION( boost::simd::tag::firstbitset_, tag::cpu_
-                            , (A0)(X)
-                            , ((simd_<arithmetic_<A0>,X>))
-                            )
+                                   , (A0)(X)
+                                   , ((simd_<arithmetic_<A0>,X>))
+                                   )
   {
     typedef typename dispatch::meta::as_integer<A0,unsigned>::type result_type;
     BOOST_SIMD_FUNCTOR_CALL(1)
     {
       typedef typename  dispatch::meta::as_integer<A0,unsigned>::type int_type;
-      return b_and((b_not(simd::bitwise_cast<int_type>(a0))+One<int_type>()), a0);
+      return boost::simd::b_and(
+        boost::simd::oneplus(boost::simd::b_not(simd::bitwise_cast<int_type>(a0))),
+        a0
+      );
     }
   };
 } } }

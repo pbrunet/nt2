@@ -25,9 +25,9 @@
 namespace boost { namespace simd { namespace ext
 {
   BOOST_SIMD_FUNCTOR_IMPLEMENTATION( boost::simd::tag::ffs_, tag::cpu_
-                            , (A0)(X)
-                            , ((simd_<type8_<A0>,X>))
-                            )
+                                   , (A0)(X)
+                                   , ((simd_<type8_<A0>,X>))
+                                   )
   {
 
     typedef typename dispatch::meta::as_integer<A0, unsigned>::type result_type;
@@ -37,17 +37,23 @@ namespace boost { namespace simd { namespace ext
       typedef typename dispatch::meta::as_integer<A0,unsigned>::type rtype;
       typedef typename A0::extension_type ext;
       typedef simd::native<typename simd::meta::biggest_integer<ext>::type, ext> ltype;
-      rtype v = firstbitset(a0);
-      return b_and(genmask(v), b_or(b_or((-( genmask(b_and(v, boost::simd::integral_constant<ltype,0xAAAAAAAAAAAAAAAAll>()))))
-                   ,  shli(-( genmask(b_and(v, boost::simd::integral_constant<ltype,0xCCCCCCCCCCCCCCCCll>()))), 1))
-              ,  shli(-( genmask(b_and(v, boost::simd::integral_constant<ltype,0xF0F0F0F0F0F0F0F0ll>()))), 2))+One<rtype>());
+      rtype v = boost::simd::firstbitset(a0);
+      return boost::simd::b_and(
+        genmask(v),
+        simd::b_or(
+          simd::b_or(
+            (-( simd::genmask(simd::b_and(v, simd::integral_constant<ltype,0xAAAAAAAAAAAAAAAAll>())))),
+            simd::shli(-( simd::genmask(simd::b_and(v, simd::integral_constant<ltype,0xCCCCCCCCCCCCCCCCll>()))), 1)),
+          simd::shli(-( simd::genmask(simd::b_and(v, simd::integral_constant<ltype,0xF0F0F0F0F0F0F0F0ll>()))), 2))
+        + simd::One<rtype>()
+      );
     }
   };
 
   BOOST_SIMD_FUNCTOR_IMPLEMENTATION( boost::simd::tag::ffs_, tag::cpu_
-                            , (A0)(X)
-                            , ((simd_<type64_<A0>,X>))
-                            )
+                                   , (A0)(X)
+                                   , ((simd_<type64_<A0>,X>))
+                                   )
   {
 
     typedef typename dispatch::meta::as_integer<A0, unsigned>::type result_type;
@@ -60,9 +66,9 @@ namespace boost { namespace simd { namespace ext
   };
 
   BOOST_SIMD_FUNCTOR_IMPLEMENTATION( boost::simd::tag::ffs_, tag::cpu_
-                            , (A0)(X)
-                            , ((simd_<type16_<A0>,X>))
-                            )
+                                   , (A0)(X)
+                                   , ((simd_<type16_<A0>,X>))
+                                   )
   {
 
     typedef typename dispatch::meta::as_integer<A0, unsigned>::type result_type;
@@ -72,18 +78,24 @@ namespace boost { namespace simd { namespace ext
       typedef typename dispatch::meta::as_integer<A0,unsigned>::type rtype;
       typedef typename A0::extension_type ext;
       typedef simd::native<typename simd::meta::biggest_integer<ext>::type, ext> ltype;
-      rtype v = firstbitset(a0);
-      return  b_and(genmask(v), b_or(b_or(b_or((-( genmask(b_and(v, boost::simd::integral_constant<ltype,0xAAAAAAAAAAAAAAAAll>()))))
-                       ,  shli(-( genmask(b_and(v, boost::simd::integral_constant<ltype,0xCCCCCCCCCCCCCCCCll>()))), 1))
-                  ,  shli(-( genmask(b_and(v, boost::simd::integral_constant<ltype,0xF0F0F0F0F0F0F0F0ll>()))), 2))
-                            ,  shli(-( genmask(b_and(v, boost::simd::integral_constant<ltype,0xFF00FF00FF00FF00ll>()))), 3))+One<rtype>());
+      rtype v = boost::simd::firstbitset(a0);
+      return  simd::b_and(
+        simd::genmask(v),
+        simd::b_or(
+          simd::b_or(
+            simd::b_or((-( simd::genmask(b_and(v, boost::simd::integral_constant<ltype,0xAAAAAAAAAAAAAAAAll>())))),
+                       simd::shli(-( simd::genmask(b_and(v, boost::simd::integral_constant<ltype,0xCCCCCCCCCCCCCCCCll>()))), 1)),
+            simd::shli(-( simd::genmask(b_and(v, boost::simd::integral_constant<ltype,0xF0F0F0F0F0F0F0F0ll>()))), 2)
+          ),
+          simd::shli(-( simd::genmask(b_and(v, boost::simd::integral_constant<ltype,0xFF00FF00FF00FF00ll>()))), 3))+simd::One<rtype>()
+      );
     }
   };
 
   BOOST_SIMD_FUNCTOR_IMPLEMENTATION( boost::simd::tag::ffs_, tag::cpu_
-                            , (A0)(X)
-                            , ((simd_<type32_<A0>,X>))
-                            )
+                                   , (A0)(X)
+                                   , ((simd_<type32_<A0>,X>))
+                                   )
   {
 
     typedef typename dispatch::meta::as_integer<A0, unsigned>::type result_type;
@@ -93,12 +105,17 @@ namespace boost { namespace simd { namespace ext
       typedef typename dispatch::meta::as_integer<A0,unsigned>::type rtype;
       typedef typename A0::extension_type ext;
       typedef simd::native<typename simd::meta::biggest_integer<ext>::type, ext> ltype;
-      rtype v = firstbitset(a0);
-      return  b_and(genmask(v), b_or(b_or(b_or(b_or((-( genmask(b_and(v, boost::simd::integral_constant<ltype,0xAAAAAAAAAAAAAAAAll>()))))
-                          ,  shli(-( genmask(b_and(v, boost::simd::integral_constant<ltype,0xCCCCCCCCCCCCCCCCll>()))), 1))
-                       ,  shli(-( genmask(b_and(v, boost::simd::integral_constant<ltype,0xF0F0F0F0F0F0F0F0ll>()))), 2))
-                  ,  shli(-( genmask(b_and(v, boost::simd::integral_constant<ltype,0xFF00FF00FF00FF00ll>()))), 3))
-               ,  shli(-( genmask(b_and(v, boost::simd::integral_constant<ltype,0xFFFF0000FFFF0000ll>()))), 4))+One<rtype>());
+      rtype v = simd::firstbitset(a0);
+      return  simd::b_and(
+        simd::genmask(v),
+        simd::b_or(
+          simd::b_or(
+            simd::b_or(simd::b_or((-( simd::genmask(b_and(v, boost::simd::integral_constant<ltype,0xAAAAAAAAAAAAAAAAll>())))),
+                                  shli(-( simd::genmask(b_and(v, boost::simd::integral_constant<ltype,0xCCCCCCCCCCCCCCCCll>()))), 1)),
+                       simd::shli(-( simd::genmask(b_and(v, boost::simd::integral_constant<ltype,0xF0F0F0F0F0F0F0F0ll>()))), 2)),
+            simd::shli(-( simd::genmask(b_and(v, boost::simd::integral_constant<ltype,0xFF00FF00FF00FF00ll>()))), 3)
+          ),
+          simd::shli(-( simd::genmask(b_and(v, boost::simd::integral_constant<ltype,0xFFFF0000FFFF0000ll>()))), 4))+simd::One<rtype>());
     }
   };
 } } }

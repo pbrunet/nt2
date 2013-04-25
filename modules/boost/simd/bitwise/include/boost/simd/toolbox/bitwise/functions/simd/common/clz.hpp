@@ -30,11 +30,11 @@ namespace boost { namespace simd { namespace ext
 
     BOOST_SIMD_FUNCTOR_CALL(1)
     {
-      result_type t =  bitwise_cast<result_type>(a0);
+      result_type t =  boost::simd::bitwise_cast<result_type>(a0);
       typedef typename meta::scalar_of<A0>::type s_type;
 
       BOOST_ASSERT_MSG( simd::all(t), "clz not defined for 0" );
-      return minusone(boost::simd::ffs(boost::simd::reversebits(t)));
+      return boost::simd::minusone(boost::simd::ffs(boost::simd::reversebits(t)));
     }
   };
 } } }

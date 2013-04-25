@@ -19,19 +19,21 @@
 namespace boost { namespace simd { namespace ext
 {
   BOOST_SIMD_FUNCTOR_IMPLEMENTATION_IF( boost::simd::tag::bitwise_notand_, tag::cpu_, (A0)(A1),
-                                 (boost::mpl::bool_<sizeof(A0) == sizeof(A1)>)
-                               , (scalar_< arithmetic_<A0> >)
-                                 (scalar_< arithmetic_<A1> >)
-                            )
+                                        (boost::mpl::bool_<sizeof(A0) == sizeof(A1)>)
+                                      , (scalar_< arithmetic_<A0> >)
+                                        (scalar_< arithmetic_<A1> >)
+                                      )
   {
     typedef A0 result_type;
     BOOST_SIMD_FUNCTOR_CALL(2)
     {
       typedef typename dispatch::meta::as_integer<A0, unsigned>::type bts;
-      return bitwise_cast<A0>(b_and(b_not(bitwise_cast<bts>(a0)),
-                                    bitwise_cast<bts>(a1)
-                                   )
-                             );
+      return boost::simd::bitwise_cast<A0>(
+        boost::simd::bitwise_and(
+          boost::simd::bitwise_not(bitwise_cast<bts>(a0)),
+          boost::simd::bitwise_cast<bts>(a1)
+        )
+      );
     }
   };
 } } }

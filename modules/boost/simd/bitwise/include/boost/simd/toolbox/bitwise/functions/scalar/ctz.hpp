@@ -28,7 +28,7 @@ namespace boost { namespace simd { namespace ext
     typedef typename dispatch::meta::as_integer<A0, unsigned>::type result_type;
     BOOST_SIMD_FUNCTOR_CALL(1)
     {
-      result_type t1 = bitwise_cast<result_type>(a0);
+      result_type t1 = boost::simd::bitwise_cast<result_type>(a0);
       BOOST_ASSERT_MSG( t1, "ctz not defined for 0" );
 
     #if defined __GNUC__
@@ -48,7 +48,7 @@ namespace boost { namespace simd { namespace ext
 
     BOOST_SIMD_FUNCTOR_CALL(1)
     {
-      result_type t1 = bitwise_cast<result_type>(a0);
+      result_type t1 = boost::simd::bitwise_cast<result_type>(a0);
       BOOST_ASSERT_MSG( t1, "ctz not defined for 0" );
 
     #ifdef __GNUC__
@@ -67,7 +67,7 @@ namespace boost { namespace simd { namespace ext
 
     BOOST_SIMD_FUNCTOR_CALL(1)
     {
-      result_type t1 = bitwise_cast<result_type>(a0);
+      result_type t1 = boost::simd::bitwise_cast<result_type>(a0);
       return boost::simd::ctz(uint32_t(t1));
     }
   };

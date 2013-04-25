@@ -9,8 +9,8 @@
 #ifndef BOOST_SIMD_TOOLBOX_BITWISE_FUNCTIONS_SCALAR_TWOPOWER_HPP_INCLUDED
 #define BOOST_SIMD_TOOLBOX_BITWISE_FUNCTIONS_SCALAR_TWOPOWER_HPP_INCLUDED
 #include <boost/simd/toolbox/bitwise/functions/twopower.hpp>
-#include <boost/simd/include/constants/digits.hpp>
-#include <boost/dispatch/meta/adapted_traits.hpp>
+#include <boost/simd/include/constants/one.hpp>
+#include <boost/simd/include/constants/zero.hpp>
 #include <boost/simd/include/functions/scalar/is_ltz.hpp>
 
 namespace boost { namespace simd { namespace ext
@@ -22,7 +22,7 @@ namespace boost { namespace simd { namespace ext
     typedef A0 result_type;
     BOOST_SIMD_FUNCTOR_CALL(1)
     {
-      return (is_ltz(a0))?Zero<A0>():(One<A0>()<<a0);
+      return (simd::is_ltz(a0)) ? simd::Zero<A0>() : (simd::One<A0>()<<a0);
     }
   };
 
@@ -31,7 +31,7 @@ namespace boost { namespace simd { namespace ext
                             )
   {
     typedef A0 result_type;
-    BOOST_SIMD_FUNCTOR_CALL(1) { return One<A0>()<<a0; }
+    BOOST_SIMD_FUNCTOR_CALL(1) { return simd::One<A0>()<<a0; }
   };
 } } }
 
