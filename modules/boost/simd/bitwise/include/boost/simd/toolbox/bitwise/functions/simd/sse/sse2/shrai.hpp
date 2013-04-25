@@ -17,6 +17,7 @@
 #include <boost/simd/include/functions/simd/split.hpp>
 #include <boost/simd/include/functions/simd/make.hpp>
 #include <boost/simd/toolbox/bitwise/functions/simd/common/shrai.hpp>
+#include <boost/simd/include/functions/scalar/bitwise_cast.hpp>
 
 namespace boost { namespace simd { namespace ext
 {
@@ -30,8 +31,8 @@ namespace boost { namespace simd { namespace ext
     BOOST_SIMD_FUNCTOR_CALL(2)
     {
       typedef typename dispatch::meta::as_integer<A0,signed>::type sint;
-      sint const that = _mm_srai_epi32(bitwise_cast<sint>(a0), a1);
-      return bitwise_cast<A0>(that);
+      sint const that = _mm_srai_epi32(boost::simd::bitwise_cast<sint>(a0), a1);
+      return boost::simd::bitwise_cast<A0>(that);
     }
   };
 
@@ -45,8 +46,8 @@ namespace boost { namespace simd { namespace ext
     BOOST_SIMD_FUNCTOR_CALL(2)
     {
       typedef typename dispatch::meta::as_integer<A0,signed>::type sint;
-      sint const that = _mm_srai_epi16(bitwise_cast<sint>(a0), a1);
-      return bitwise_cast<A0>(that);
+      sint const that = _mm_srai_epi16(boost::simd::bitwise_cast<sint>(a0), a1);
+      return boost::simd::bitwise_cast<A0>(that);
     }
   };
 
@@ -62,8 +63,9 @@ namespace boost { namespace simd { namespace ext
     BOOST_SIMD_FUNCTOR_CALL(2)
     {
       gen_t a0h, a0l;
-      boost::fusion::tie(a0l, a0h) = split(a0);
-      return bitwise_cast<A0>(group(shrai(a0l, a1),shrai(a0h, a1)));
+      boost::fusion::tie(a0l, a0h) = boost::simd::split(a0);
+      return bitwise_cast<A0>(boost::simd::group(boost::simd::shrai(a0l, a1),
+                                                 boost::simd::shrai(a0h, a1)));
     }
   };
 
@@ -76,7 +78,8 @@ namespace boost { namespace simd { namespace ext
     typedef A0 result_type;
     BOOST_SIMD_FUNCTOR_CALL(2)
     {
-      return make<A0>(shrai(a0[0], a1), shrai(a0[1], a1));
+      return boost::simd::make<A0>(boost::simd::shrai(a0[0], a1),
+                                   boost::simd::shrai(a0[1], a1));
     }
   };
 } } }

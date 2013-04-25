@@ -30,7 +30,7 @@ namespace boost { namespace simd { namespace ext
     typedef A0 result_type;
     BOOST_SIMD_FUNCTOR_CALL(1)
     {
-      return _mm_cmpneq_pd(a0,Zero<A0>());
+      return _mm_cmpneq_pd(a0,boost::simd::Zero<A0>());
     }
   };
 
@@ -42,7 +42,7 @@ namespace boost { namespace simd { namespace ext
     typedef A0 result_type;
     BOOST_SIMD_FUNCTOR_CALL(1)
     {
-      return _mm_cmpneq_ps(a0,Zero<A0>());
+      return _mm_cmpneq_ps(a0,boost::simd::Zero<A0>());
     }
   };
 
@@ -54,8 +54,8 @@ namespace boost { namespace simd { namespace ext
     typedef A0 result_type;
     BOOST_SIMD_FUNCTOR_CALL(1)
     {
-      result_type that = _mm_cmpeq_epi8(a0,Zero<A0>());
-      return complement(that);
+      result_type that = _mm_cmpeq_epi8(a0,boost::simd::Zero<A0>());
+      return boost::simd::complement(that);
     }
   };
 
@@ -67,8 +67,8 @@ namespace boost { namespace simd { namespace ext
     typedef A0 result_type;
     BOOST_SIMD_FUNCTOR_CALL(1)
     {
-      result_type that = _mm_cmpeq_epi16(a0,Zero<A0>());
-      return complement(that);
+      result_type that = _mm_cmpeq_epi16(a0,boost::simd::Zero<A0>());
+      return boost::simd::complement(that);
     }
   };
 
@@ -80,8 +80,8 @@ namespace boost { namespace simd { namespace ext
     typedef A0 result_type;
     BOOST_SIMD_FUNCTOR_CALL(1)
     {
-      result_type that = _mm_cmpeq_epi32(a0,Zero<A0>());
-      return complement(that);
+      result_type that = _mm_cmpeq_epi32(a0,boost::simd::Zero<A0>());
+      return boost::simd::complement(that);
     }
   };
 
@@ -94,10 +94,10 @@ namespace boost { namespace simd { namespace ext
     BOOST_SIMD_FUNCTOR_CALL(1)
     {
       typedef typename dispatch::meta::downgrade<A0, unsigned>::type  type;
-      type tmp      = bitwise_cast<type>(a0-Zero<A0>());
-      tmp           = bitwise_cast<type>(genmask(tmp));
+      type tmp      = boost::simd::bitwise_cast<type>(a0-boost::simd::Zero<A0>());
+      tmp           = boost::simd::bitwise_cast<type>(boost::simd::genmask(tmp));
       type tmp2     = details::shuffle<1,0,3,2>(tmp);
-      return bitwise_cast<result_type>(tmp | tmp2);
+      return boost::simd::bitwise_cast<result_type>(tmp | tmp2);
     }
   };
 } } }

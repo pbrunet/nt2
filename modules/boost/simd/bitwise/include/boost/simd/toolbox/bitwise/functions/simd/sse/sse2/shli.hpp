@@ -33,21 +33,21 @@ namespace boost { namespace simd { namespace ext
     {
       typedef simd::native<int_t,boost::simd::tag::sse_> gen_type;
       result_type const
-      Mask1 = bitwise_cast<result_type>( boost::simd::integral_constant< gen_type
+      Mask1 = boost::simd::bitwise_cast<result_type>( boost::simd::integral_constant< gen_type
                                                       , 0x00ff00ff00ff00ffll
                                                       >()
                                     );
       result_type const
-      Mask2 = bitwise_cast<result_type>( boost::simd::integral_constant < gen_type
+      Mask2 = boost::simd::bitwise_cast<result_type>( boost::simd::integral_constant < gen_type
                                                         , 0xff00ff00ff00ff00ll
                                                         >()
                                     );
-      result_type tmp  = b_and(a0, Mask1);
+      result_type tmp  = boost::simd::b_and(a0, Mask1);
       result_type tmp1 = _mm_slli_epi16(tmp, int(a1));
-      tmp1 = b_and(tmp1, Mask1);
-      tmp = b_and(a0, Mask2);
+      tmp1 = boost::simd::b_and(tmp1, Mask1);
+      tmp = boost::simd::b_and(a0, Mask2);
       result_type tmp3 = _mm_slli_epi16(tmp, int(a1));
-      return tmp1 | b_and(tmp3, Mask2);
+      return tmp1 | boost::simd::b_and(tmp3, Mask2);
     }
   };
 
@@ -62,8 +62,8 @@ namespace boost { namespace simd { namespace ext
     BOOST_SIMD_FUNCTOR_CALL(2)
     {
       typedef typename dispatch::meta::as_integer<A0,signed>::type sint;
-      sint const that = _mm_slli_epi32(bitwise_cast<sint>(a0), int(a1));
-      return bitwise_cast<A0>(that);
+      sint const that = _mm_slli_epi32(boost::simd::bitwise_cast<sint>(a0), int(a1));
+      return boost::simd::bitwise_cast<A0>(that);
     }
   };
 
@@ -78,8 +78,8 @@ namespace boost { namespace simd { namespace ext
     BOOST_SIMD_FUNCTOR_CALL(2)
     {
       typedef typename dispatch::meta::as_integer<A0,signed>::type sint;
-      sint const that = _mm_slli_epi64(bitwise_cast<sint>(a0), int(a1));
-      return bitwise_cast<A0>(that);
+      sint const that = _mm_slli_epi64(boost::simd::bitwise_cast<sint>(a0), int(a1));
+      return boost::simd::bitwise_cast<A0>(that);
     }
   };
 
