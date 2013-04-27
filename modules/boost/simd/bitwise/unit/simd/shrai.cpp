@@ -6,13 +6,6 @@
 //                 See accompanying file LICENSE.txt or copy at
 //                     http://www.boost.org/LICENSE_1_0.txt
 //==============================================================================
-#define NT2_UNIT_MODULE "nt2 boost.simd.bitwise toolbox - shrai/simd Mode"
-
-//////////////////////////////////////////////////////////////////////////////
-// unit test behavior of boost.simd.bitwise components in simd mode
-//////////////////////////////////////////////////////////////////////////////
-/// created  by jt the 18/02/2011
-///
 #include <boost/simd/bitwise/include/functions/shrai.hpp>
 #include <boost/simd/sdk/simd/native.hpp>
 #include <boost/simd/include/functions/twopower.hpp>
@@ -23,16 +16,11 @@
 #include <nt2/sdk/unit/tests.hpp>
 #include <nt2/sdk/unit/module.hpp>
 #include <boost/simd/constant/constant.hpp>
-#include <boost/simd/sdk/memory/is_aligned.hpp>
-#include <boost/simd/sdk/memory/aligned_type.hpp>
-#include <boost/simd/include/functions/load.hpp>
-
 
 NT2_TEST_CASE_TPL ( shrai_unsigned_int__2_0,  BOOST_SIMD_SIMD_UNSIGNED_TYPES)
 {
   using boost::simd::shrai;
   using boost::simd::tag::shrai_;
-  using boost::simd::load;
   using boost::simd::native;
   using boost::simd::meta::cardinal_of;
   typedef T r_type;
@@ -58,7 +46,6 @@ NT2_TEST_CASE_TPL ( shrai_signed_int__2_0,  BOOST_SIMD_SIMD_INTEGRAL_SIGNED_TYPE
 {
   using boost::simd::shrai;
   using boost::simd::tag::shrai_;
-  using boost::simd::load;
   using boost::simd::native;
   using boost::simd::meta::cardinal_of;
   typedef T r_type;

@@ -38,8 +38,12 @@ extern "C" {extern long double cephes_cosl(long double);}
 #include <nt2/constant/constant.hpp>
 #include <nt2/sdk/meta/cardinal_of.hpp>
 #include <nt2/include/functions/splat.hpp>
+<<<<<<< HEAD
 #include <nt2/include/functions/load.hpp>
 #include <nt2/constant/constant.hpp>
+=======
+#include <nt2/constant/constant.hpp>
+>>>>>>> ef6662d... Remove spurrious memory related include from unit tests
 #include <boost/simd/sdk/simd/io.hpp>
 
 NT2_TEST_CASE_TPL ( rem_pio2_real__1_0,  NT2_SIMD_REAL_TYPES)
