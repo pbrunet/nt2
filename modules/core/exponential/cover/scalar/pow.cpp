@@ -31,7 +31,7 @@ extern "C" { long double cephes_powl(long double,long double); }
 #include <boost/type_traits/common_type.hpp>
 #include <nt2/sdk/unit/tests.hpp>
 #include <nt2/sdk/unit/module.hpp>
-#include <nt2/sdk/memory/buffer.hpp>
+
 #include <nt2/constant/constant.hpp>
 
 extern "C" { long double cephes_powil(long double,int); }

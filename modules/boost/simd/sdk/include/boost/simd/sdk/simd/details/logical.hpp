@@ -14,10 +14,9 @@
 #include <boost/simd/sdk/simd/details/native/meta/cardinal_of.hpp>
 #include <boost/simd/sdk/simd/meta/as_simd.hpp>
 #include <boost/simd/sdk/meta/as_logical.hpp>
-#include <boost/simd/sdk/memory/overload.hpp>
+#include <boost/simd/memory/overload.hpp>
 #include <boost/simd/sdk/simd/details/soa_proxy.hpp>
 #include <boost/simd/sdk/config/compiler.hpp>
-#include <boost/simd/sdk/memory/overload.hpp>
 
 namespace boost { namespace simd { namespace meta
 {
@@ -36,7 +35,8 @@ namespace boost { namespace simd { namespace meta
 namespace boost { namespace simd
 {
   template<class Scalar,class Extension>
-  struct native<logical<Scalar>, Extension>
+  struct  native<logical<Scalar>, Extension>
+        : boost::simd::memory::aligned_object<>
   {
     typedef Extension                                       extension_type;
     typedef typename meta::
@@ -86,11 +86,6 @@ namespace boost { namespace simd
     BOOST_FORCEINLINE          native_type const& operator()()  const { return data_; }
 
     ////////////////////////////////////////////////////////////////////////////
-    // new/delete operator to force alignment on heap of native values
-    ////////////////////////////////////////////////////////////////////////////
-    BOOST_SIMD_MEMORY_OVERLOAD_NEW_DELETE(native)
-
-    ////////////////////////////////////////////////////////////////////////////
     // Range interface
     ////////////////////////////////////////////////////////////////////////////
     typedef std::size_t                                          size_type;
@@ -128,15 +123,7 @@ namespace boost { namespace simd
       return typename dispatch::make_functor<tag::extract_, value_type>::type()(*this, i);
     }
 
-#if defined(BOOST_SIMD_COMPILER_GCC) && BOOST_SIMD_GCC_VERSION == 40603
-    // workaround for GCC bug #52407 affecting GCC 4.6
-    union
-    {
-#endif
       native_type data_;
-#if defined(BOOST_SIMD_COMPILER_GCC) && BOOST_SIMD_GCC_VERSION == 40603
-    };
-#endif
   };
 } }
 

@@ -16,7 +16,7 @@
 #include <boost/simd/sdk/simd/meta/as_simd.hpp>
 #include <boost/simd/sdk/simd/details/native/meta.hpp>
 #include <boost/simd/sdk/simd/details/operators.hpp>
-#include <boost/simd/sdk/memory/overload.hpp>
+#include <boost/simd/memory/overload.hpp>
 #include <boost/simd/sdk/config/compiler.hpp>
 #include <boost/fusion/adapted/boost_array.hpp>
 
@@ -27,6 +27,7 @@ namespace boost { namespace simd
   //////////////////////////////////////////////////////////////////////////////
   template<class Scalar,class Extension,class Enable>
   struct BOOST_SIMD_MAY_ALIAS native
+          : boost::simd::memory::aligned_object<>
   {
     ////////////////////////////////////////////////////////////////////////////
     // native<S,E> is a SIMD type encapsulation
@@ -93,11 +94,6 @@ namespace boost { namespace simd
     BOOST_FORCEINLINE          native_type const& operator()()  const { return data_; }
 
     ////////////////////////////////////////////////////////////////////////////
-    // new/delete operator to force alignment on heap of native values
-    ////////////////////////////////////////////////////////////////////////////
-    BOOST_SIMD_MEMORY_OVERLOAD_NEW_DELETE(native)
-
-    ////////////////////////////////////////////////////////////////////////////
     // Range interface
     ////////////////////////////////////////////////////////////////////////////
     BOOST_FORCEINLINE
@@ -121,15 +117,7 @@ namespace boost { namespace simd
     reference       operator[](std::size_t i)       { return data()[i]; }
     const_reference operator[](std::size_t i) const { return data()[i]; }
 
-#if defined(BOOST_SIMD_COMPILER_GCC) && BOOST_SIMD_GCC_VERSION == 40603
-    // workaround for GCC bug #52407 affecting GCC 4.6.3
-    union
-    {
-#endif
-      native_type data_;
-#if defined(BOOST_SIMD_COMPILER_GCC) && BOOST_SIMD_GCC_VERSION == 40603
-    };
-#endif
+    native_type data_;
 
     BOOST_FORCEINLINE
     iterator data()
