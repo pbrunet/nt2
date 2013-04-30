@@ -21,6 +21,11 @@
 #pragma warning( disable : 4522 ) // multiple assignment operators specified
 #endif
 
+namespace nt2 { namespace tag
+{
+  struct table_;
+} }
+
 namespace nt2 { namespace container
 {
   /* table_view; an expression of a container_ref terminal.
@@ -28,18 +33,23 @@ namespace nt2 { namespace container
   template<typename T, typename S>
   struct table_view
        : expression< boost::proto::basic_expr < boost::proto::tag::terminal
-                                              , boost::proto::term< memory::container_ref<T, S, tag::table_> >
+                                              , boost::proto::term
+                                                < memory::container_ref < T
+                                                                        , S
+                                                                        , nt2::tag::table_
+                                                                        >
+                                                >
                                               , 0l
                                               >
-                   , memory::container<T, S, tag::table_>&
+                   , memory::container<T, S, nt2::tag::table_>&
                    >
   {
-    typedef memory::container_ref<T, S, tag::table_>             container_ref;
+    typedef memory::container_ref<T, S, nt2::tag::table_>             container_ref;
     typedef boost::proto::basic_expr< boost::proto::tag::terminal
                                     , boost::proto::term<container_ref>
                                     , 0l
                                     >               basic_expr;
-    typedef memory::container<T, S, tag::table_>&                container_type;
+    typedef memory::container<T, S, nt2::tag::table_>&                container_type;
     typedef expression<basic_expr, container_type>  nt2_expression;
 
     typedef typename container_ref::iterator        iterator;
@@ -61,10 +71,10 @@ namespace nt2 { namespace container
 
     BOOST_FORCEINLINE
     table_view( expression< boost::proto::basic_expr< boost::proto::tag::terminal
-                                                    , boost::proto::term< memory::container<T, S, tag::table_> >
+                                                    , boost::proto::term< memory::container<T, S, nt2::tag::table_> >
                                                     , 0l
                                                     >
-                          , memory::container<T, S, tag::table_>
+                          , memory::container<T, S, nt2::tag::table_>
                           > & expr
               )
               : nt2_expression(basic_expr::make(boost::proto::value(expr)))
@@ -73,10 +83,10 @@ namespace nt2 { namespace container
 
     BOOST_FORCEINLINE
     table_view( expression< boost::proto::basic_expr< boost::proto::tag::terminal
-                                                    , boost::proto::term< memory::container<T, S, tag::table_>& >
+                                                    , boost::proto::term< memory::container<T, S, nt2::tag::table_>& >
                                                     , 0l
                                                     >
-                          , memory::container<T, S, tag::table_>&
+                          , memory::container<T, S, nt2::tag::table_>&
                           > const& expr
               )
               : nt2_expression(basic_expr::make(boost::proto::value(expr)))
@@ -98,24 +108,24 @@ namespace nt2 { namespace container
        : expression< boost::proto::basic_expr < boost::proto::tag::terminal
                                               , boost::proto::term< memory::container_ref < T const
                                                                                           , S
-                                                                                          , tag::table_
+                                                                                          , nt2::tag::table_
                                                                                           >
                                                                   >
                                               , 0l
                                               >
-                   , memory::container<T, S, tag::table_> const&
+                   , memory::container<T, S, nt2::tag::table_> const&
                    >
   {
-    typedef memory::container_ref<T const, S, tag::table_>       container_ref;
+    typedef memory::container_ref<T const, S, nt2::tag::table_>       container_ref;
     typedef boost::proto::basic_expr< boost::proto::tag::terminal
                                     , boost::proto::term< memory::container_ref < T const
                                                                                 , S
-                                                                                , tag::table_
+                                                                                , nt2::tag::table_
                                                                                 >
                                                         >
                                     , 0l
                                     >               basic_expr;
-    typedef memory::container<T, S, tag::table_> const&          container_type;
+    typedef memory::container<T, S, nt2::tag::table_> const&          container_type;
     typedef expression<basic_expr, container_type>  nt2_expression;
 
     typedef typename container_ref::iterator        iterator;
@@ -137,10 +147,10 @@ namespace nt2 { namespace container
 
     BOOST_FORCEINLINE
     table_view( expression< boost::proto::basic_expr< boost::proto::tag::terminal
-                                                    , boost::proto::term< memory::container<T, S, tag::table_> >
+                                                    , boost::proto::term< memory::container<T, S, nt2::tag::table_> >
                                                     , 0l
                                                     >
-                          , memory::container<T, S, tag::table_>
+                          , memory::container<T, S, nt2::tag::table_>
                           > const& expr
               )
               : nt2_expression(basic_expr::make(boost::proto::value(expr)))
@@ -151,12 +161,12 @@ namespace nt2 { namespace container
     table_view( expression< boost::proto::basic_expr< boost::proto::tag::terminal
                                                     , boost::proto::term< memory::container < T
                                                                                             , S
-                                                                                            , tag::table_
+                                                                                            , nt2::tag::table_
                                                                                             > const&
                                                                         >
                                                     , 0l
                                                     >
-                          , memory::container<T, S, tag::table_> const&
+                          , memory::container<T, S, nt2::tag::table_> const&
                           > const& expr
               )
               : nt2_expression(basic_expr::make(boost::proto::value(expr)))

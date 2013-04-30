@@ -23,19 +23,19 @@ namespace nt2 { namespace container
   struct table_shared_view
        : expression< boost::proto::basic_expr < boost::proto::tag::terminal
                                               , boost::proto::term< memory
-                                                                  ::container_shared_ref<T,S, tag::table_,false>
+                                                                  ::container_shared_ref<T,S, nt2::tag::table_,false>
                                                                   >
                                               , 0l
                                               >
-                   , memory::container<T, S, tag::table_>&
+                   , memory::container<T, S, nt2::tag::table_>&
                    >
   {
-    typedef memory::container_shared_ref< T, S, tag::table_, false >   container_ref;
+    typedef memory::container_shared_ref< T, S, nt2::tag::table_, false >   container_ref;
     typedef boost::proto::basic_expr< boost::proto::tag::terminal
                                     , boost::proto::term<container_ref>
                                     , 0l
                                     >                     basic_expr;
-    typedef memory::container<T, S, tag::table_>&                      container_type;
+    typedef memory::container<T, S, nt2::tag::table_>&                      container_type;
     typedef expression<basic_expr, container_type>        nt2_expression;
 
     typedef typename container_ref::iterator              iterator;
@@ -76,19 +76,19 @@ namespace nt2 { namespace container
   struct table_shared_view<T const, S>
        : expression <  boost::proto::basic_expr
                       < boost::proto::tag::terminal
-                      , boost::proto::term< memory::container_shared_ref< T const, S, tag::table_, false >
+                      , boost::proto::term< memory::container_shared_ref< T const, S, nt2::tag::table_, false >
                       >
                     , 0l
                     >
-                   , memory::container<T, S, tag::table_> const&
+                   , memory::container<T, S, nt2::tag::table_> const&
                    >
   {
-    typedef memory::container_shared_ref< T const, S, tag::table_, false >   container_ref;
+    typedef memory::container_shared_ref< T const, S, nt2::tag::table_, false >   container_ref;
     typedef boost::proto::basic_expr< boost::proto::tag::terminal
                                     , boost::proto::term<container_ref>
                                     , 0l
                                     >                           basic_expr;
-    typedef memory::container<T, S, tag::table_> const&                      container_type;
+    typedef memory::container<T, S, nt2::tag::table_> const&                      container_type;
     typedef expression<basic_expr, container_type>              nt2_expression;
 
     typedef typename container_ref::iterator                    iterator;
