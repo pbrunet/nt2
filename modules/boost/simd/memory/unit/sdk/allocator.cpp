@@ -6,8 +6,6 @@
  *                 See accompanying file LICENSE.txt or copy at
  *                     http://www.boost.org/LICENSE_1_0.txt
  ******************************************************************************/
-#define NT2_UNIT_MODULE "boost::simd::memory::allocator"
-
 #include <boost/simd/memory/allocator.hpp>
 #include <boost/simd/memory/is_aligned.hpp>
 
@@ -18,8 +16,8 @@
 
 NT2_TEST_CASE_TPL(allocator_allocate, BOOST_SIMD_TYPES)
 {
-  using boost::simd::memory::allocate;
-  using boost::simd::memory::deallocate;
+  using boost::simd::allocate;
+  using boost::simd::deallocate;
   using boost::simd::is_aligned;
 
   std::allocator<T> alloc;
@@ -35,8 +33,8 @@ NT2_TEST_CASE_TPL(allocator_allocate, BOOST_SIMD_TYPES)
 
 NT2_TEST_CASE_TPL(allocator_allocate_align, BOOST_SIMD_TYPES)
 {
-  using boost::simd::memory::allocate;
-  using boost::simd::memory::deallocate;
+  using boost::simd::allocate;
+  using boost::simd::deallocate;
   using boost::simd::is_aligned;
 
   std::allocator<T> alloc;
@@ -52,8 +50,8 @@ NT2_TEST_CASE_TPL(allocator_allocate_align, BOOST_SIMD_TYPES)
 
 NT2_TEST_CASE_TPL(static_allocator_allocate_align, BOOST_SIMD_TYPES)
 {
-  using boost::simd::memory::allocate;
-  using boost::simd::memory::deallocate;
+  using boost::simd::allocate;
+  using boost::simd::deallocate;
   using boost::simd::is_aligned;
 
   std::allocator<T> alloc;
@@ -70,7 +68,7 @@ NT2_TEST_CASE_TPL(static_allocator_allocate_align, BOOST_SIMD_TYPES)
 NT2_TEST_CASE_TPL(vector, BOOST_SIMD_TYPES)
 {
   using boost::simd::is_aligned;
-  std::vector<T, boost::simd::memory::allocator<T> > p(5);
+  std::vector<T, boost::simd::allocator<T> > p(5);
 
   NT2_TEST( is_aligned( &p[0] ) );
   for(int i=0;i<5;++i) p[i] = T(10)*i;

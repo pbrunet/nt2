@@ -23,7 +23,7 @@
 #include <cstring>
 #include <cstddef>
 
-namespace boost { namespace simd {  namespace memory
+namespace boost { namespace simd
 {
   /*!
     @brief Aligned memory recycling
@@ -167,6 +167,6 @@ namespace boost { namespace simd {  namespace memory
   {
     return align_ptr<BOOST_SIMD_CONFIG_ALIGNMENT>(reuse(alloc,ptr,nbytes));
   }
-} } }
+} }
 
 #endif

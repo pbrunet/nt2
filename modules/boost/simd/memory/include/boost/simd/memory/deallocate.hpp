@@ -19,7 +19,7 @@
 #include <boost/dispatch/attributes.hpp>
 #include <cstddef>
 
-namespace boost { namespace simd {  namespace memory
+namespace boost { namespace simd
 {
   /*!
     @brief Aligned pointer deallocation
@@ -31,7 +31,7 @@ namespace boost { namespace simd {  namespace memory
   **/
   BOOST_FORCEINLINE void deallocate( void* ptr )
   {
-    simd::memory::aligned_free( ptr );
+    simd::aligned_free( ptr );
   }
 
   /*!
@@ -54,6 +54,6 @@ namespace boost { namespace simd {  namespace memory
 
     alloc.deallocate( static_cast<typename Allocator::pointer>(old.pBlockBase), oldSize );
   }
-} } }
+} }
 
 #endif

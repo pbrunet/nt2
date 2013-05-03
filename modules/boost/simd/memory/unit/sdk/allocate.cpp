@@ -21,8 +21,8 @@
 //==============================================================================
 NT2_TEST_CASE(allocate)
 {
-  using boost::simd::memory::allocate;
-  using boost::simd::memory::deallocate;
+  using boost::simd::allocate;
+  using boost::simd::deallocate;
   using boost::simd::is_aligned;
 
   char* ptr = 0;
@@ -39,8 +39,8 @@ NT2_TEST_CASE(allocate)
 //==============================================================================
 NT2_TEST_CASE(allocate_align)
 {
-  using boost::simd::memory::allocate;
-  using boost::simd::memory::deallocate;
+  using boost::simd::allocate;
+  using boost::simd::deallocate;
   using boost::simd::is_aligned;
 
   char* ptr = 0;
@@ -57,8 +57,8 @@ NT2_TEST_CASE(allocate_align)
 //==============================================================================
 NT2_TEST_CASE(allocate_static_align)
 {
-  using boost::simd::memory::allocate;
-  using boost::simd::memory::deallocate;
+  using boost::simd::allocate;
+  using boost::simd::deallocate;
   using boost::simd::is_aligned;
 
   char* ptr = 0;
@@ -75,8 +75,8 @@ NT2_TEST_CASE(allocate_static_align)
 //==============================================================================
 NT2_TEST_CASE(reallocate)
 {
-  using boost::simd::memory::reallocate;
-  using boost::simd::memory::deallocate;
+  using boost::simd::reallocate;
+  using boost::simd::deallocate;
   using boost::simd::is_aligned;
 
   char *ptr(0), *ptr2(0);
@@ -101,8 +101,8 @@ NT2_TEST_CASE(reallocate)
 //==============================================================================
 NT2_TEST_CASE(reallocate_align)
 {
-  using boost::simd::memory::reallocate;
-  using boost::simd::memory::deallocate;
+  using boost::simd::reallocate;
+  using boost::simd::deallocate;
   using boost::simd::is_aligned;
 
   char *ptr(0), *ptr2(0);

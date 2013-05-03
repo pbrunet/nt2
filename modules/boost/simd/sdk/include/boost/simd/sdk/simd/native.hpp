@@ -27,7 +27,7 @@ namespace boost { namespace simd
   //////////////////////////////////////////////////////////////////////////////
   template<class Scalar,class Extension,class Enable>
   struct BOOST_SIMD_MAY_ALIAS native
-          : boost::simd::memory::aligned_object<>
+          : boost::simd::aligned_object<>
   {
     ////////////////////////////////////////////////////////////////////////////
     // native<S,E> is a SIMD type encapsulation

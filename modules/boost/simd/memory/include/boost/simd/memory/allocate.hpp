@@ -26,7 +26,7 @@
 #include <boost/throw_exception.hpp>
 #include <cstddef>
 
-namespace boost { namespace simd {  namespace memory
+namespace boost { namespace simd
 {
   /*!
     @brief Non-throwing allocation of aligned memory on custom alignment
@@ -242,6 +242,6 @@ namespace boost { namespace simd {  namespace memory
   {
     return allocate<BOOST_SIMD_CONFIG_ALIGNMENT>(alloc,nbytes);
   }
-} } }
+} }
 
 #endif

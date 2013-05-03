@@ -36,7 +36,7 @@ namespace boost { namespace simd
 {
   template<class Scalar,class Extension>
   struct  native<logical<Scalar>, Extension>
-        : boost::simd::memory::aligned_object<>
+        : boost::simd::aligned_object<>
   {
     typedef Extension                                       extension_type;
     typedef typename meta::
