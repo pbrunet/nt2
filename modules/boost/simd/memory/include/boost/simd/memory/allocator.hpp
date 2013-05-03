@@ -69,13 +69,12 @@ namespace boost { namespace simd {  namespace memory
     ////////////////////////////////////////////////////////////////////////////
     pointer allocate( size_type c, const void* = 0 ) const
     {
-      byte* ptr = memory::allocate(c*sizeof(value_type));
-      return reinterpret_cast<pointer>(ptr);
+      return reinterpret_cast<pointer>(memory::allocate(c*sizeof(value_type)));
     }
 
     void deallocate (pointer p, size_type ) const
     {
-      boost::simd::memory::deallocate(reinterpret_cast<byte*>(p) );
+      boost::simd::memory::deallocate( p );
     }
   };
 

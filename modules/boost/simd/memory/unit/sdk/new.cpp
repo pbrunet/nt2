@@ -17,7 +17,6 @@
 
 NT2_TEST_CASE_TPL(new_delete, BOOST_SIMD_TYPES)
 {
-  using boost::simd::memory::byte;
   using boost::simd::memory::allocate;
   using boost::simd::memory::deallocate;
   using boost::simd::is_aligned;
@@ -35,7 +34,6 @@ NT2_TEST_CASE_TPL(new_delete, BOOST_SIMD_TYPES)
 
 NT2_TEST_CASE_TPL(new_delete_aligned, BOOST_SIMD_TYPES)
 {
-  using boost::simd::memory::byte;
   using boost::simd::memory::allocate;
   using boost::simd::memory::deallocate;
   using boost::simd::is_aligned;
@@ -53,7 +51,6 @@ NT2_TEST_CASE_TPL(new_delete_aligned, BOOST_SIMD_TYPES)
 
 NT2_TEST_CASE_TPL(new_delete_no_throw, BOOST_SIMD_TYPES)
 {
-  using boost::simd::memory::byte;
   using boost::simd::memory::allocate;
   using boost::simd::memory::deallocate;
   using boost::simd::is_aligned;
@@ -71,7 +68,6 @@ NT2_TEST_CASE_TPL(new_delete_no_throw, BOOST_SIMD_TYPES)
 
 NT2_TEST_CASE_TPL(new_delete_no_throw_aligned, BOOST_SIMD_TYPES)
 {
-  using boost::simd::memory::byte;
   using boost::simd::memory::allocate;
   using boost::simd::memory::deallocate;
   using boost::simd::is_aligned;

@@ -29,10 +29,7 @@ namespace boost { namespace simd { namespace memory
 
     void operator()(T * x)
     {
-      boost::simd::memory::deallocate ( static_cast<Allocator&>(*this)
-                                      , reinterpret_cast<byte*>(x)
-                                      , 0u, Align
-                                      );
+      boost::simd::memory::deallocate ( static_cast<Allocator&>(*this), x, 0u, Align );
     }
   };
 
@@ -44,7 +41,7 @@ namespace boost { namespace simd { namespace memory
 
     void operator()(T * x) const
     {
-      boost::simd::memory::deallocate( reinterpret_cast<byte*>(x), 0u, Align );
+      boost::simd::memory::deallocate( x, 0u, Align );
     }
   };
 } } }

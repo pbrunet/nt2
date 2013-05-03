@@ -89,14 +89,13 @@ NT2_TEST_CASE(make_aligned_array)
 ////////////////////////////////////////////////////////////////////////////////
 NT2_TEST_CASE(align_ptr)
 {
-  using boost::simd::memory::byte;
-  using boost::simd::memory::align_ptr;
   using boost::simd::is_aligned;
+  using boost::simd::memory::align_ptr;
   using boost::simd::memory::allocate;
   using boost::simd::memory::deallocate;
 
-  byte* ptr = allocate(15, 32);
-  boost::simd::meta::align_ptr<byte, 32>::type p = align_ptr<32>(ptr);
+  void* ptr = allocate(15, 32);
+  boost::simd::meta::align_ptr<void, 32>::type p = align_ptr<32>(ptr);
   NT2_TEST( is_aligned(p, 32) );
   NT2_TEST_EQUAL(p, ptr);
 

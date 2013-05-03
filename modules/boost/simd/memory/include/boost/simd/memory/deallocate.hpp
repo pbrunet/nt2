@@ -29,7 +29,7 @@ namespace boost { namespace simd {  namespace memory
 
     @param ptr Pointer to the memory to free.
   **/
-  BOOST_FORCEINLINE void deallocate( byte* ptr )
+  BOOST_FORCEINLINE void deallocate( void* ptr )
   {
     simd::memory::aligned_free( ptr );
   }
@@ -46,16 +46,13 @@ namespace boost { namespace simd {  namespace memory
   BOOST_FORCEINLINE
   typename boost::dispatch::meta
                 ::enable_if_type< typename Allocator::pointer >::type
-  deallocate( Allocator& alloc, byte* ptr )
+  deallocate( Allocator& alloc, void* ptr )
   {
     // How many elements are needed to store proper number of bytes
     details::aligned_block_header const old( details::get_block_header( ptr ) );
     std::size_t const oldSize( old.userBlockSize );
 
-    alloc.deallocate
-            ( reinterpret_cast<typename Allocator::pointer>( old.pBlockBase )
-            , oldSize
-            );
+    alloc.deallocate( static_cast<typename Allocator::pointer>(old.pBlockBase), oldSize );
   }
 } } }
 

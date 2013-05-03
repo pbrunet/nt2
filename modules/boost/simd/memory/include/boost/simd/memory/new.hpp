@@ -34,6 +34,9 @@ void* operator new(std::size_t sz, const std::nothrow_t& throw_status) throw()
 
 /*!
   @brief Aligned new operator
+
+  This is a global overload for the throwing new operator that performs
+  allocation respecting the current architecture SIMD alignment.
 **/
 void* operator new(std::size_t sz) throw(std::bad_alloc)
 {
@@ -97,8 +100,7 @@ void* operator new[](std::size_t sz) throw(std::bad_alloc)
 **/
 void operator delete(void* m)  throw()
 {
-  boost::simd::memory
-             ::deallocate(reinterpret_cast<boost::simd::memory::byte*>(m));
+  boost::simd::memory::deallocate(m);
 }
 
 /*!
@@ -106,8 +108,7 @@ void operator delete(void* m)  throw()
 **/
 void operator delete[](void* m) throw()
 {
-  boost::simd::memory
-             ::deallocate(reinterpret_cast<boost::simd::memory::byte*>(m));
+  boost::simd::memory::deallocate(m);
 }
 
 /*!
@@ -115,8 +116,7 @@ void operator delete[](void* m) throw()
 **/
 void operator delete(void* m, const std::nothrow_t&) throw()
 {
-  boost::simd::memory
-             ::deallocate(reinterpret_cast<boost::simd::memory::byte*>(m));
+  boost::simd::memory::deallocate(m);
 }
 
 /*!
@@ -124,8 +124,7 @@ void operator delete(void* m, const std::nothrow_t&) throw()
 **/
 void operator delete[](void* m, const std::nothrow_t&) throw()
 {
-  boost::simd::memory
-             ::deallocate(reinterpret_cast<boost::simd::memory::byte*>(m));
+  boost::simd::memory::deallocate(m);
 }
 
 #endif
