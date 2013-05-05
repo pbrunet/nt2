@@ -15,7 +15,11 @@ SET(  SOURCES
       is_power_of_2.cpp
       load.cpp
       new.cpp
+      scoped_buffer.cpp
       simd_malloc.cpp
+      simd_scoped_buffer.cpp
+      simd_stack_buffer.cpp
+      stack_buffer.cpp
 )
 
 ################################################################################
