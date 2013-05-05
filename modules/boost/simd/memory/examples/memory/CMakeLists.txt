@@ -12,6 +12,7 @@ SET(  SOURCES
       align_on_default.cpp
       align_ptr.cpp
       is_aligned.cpp
+      is_power_of_2.cpp
       load.cpp
       new.cpp
 )
