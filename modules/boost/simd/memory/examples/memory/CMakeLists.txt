@@ -15,6 +15,7 @@ SET(  SOURCES
       is_power_of_2.cpp
       load.cpp
       new.cpp
+      simd_malloc.cpp
 )
 
 ################################################################################
