@@ -7,5 +7,19 @@
 #                     http://www.boost.org/LICENSE_1_0.txt
 ################################################################################
 
-ADD_SUBDIRECTORY(memory)
-ADD_SUBDIRECTORY(meta)
+SET(  SOURCES
+      align_on.cpp
+      align_on_default.cpp
+      align_ptr.cpp
+      is_aligned.cpp
+      load.cpp
+      new.cpp
+)
+
+################################################################################
+# For each filename
+################################################################################
+FOREACH( EXAMPLE ${SOURCES})
+  STRING(REGEX REPLACE ".cpp" "" EXAMPLE ${EXAMPLE})
+  nt2_module_add_example(boost.simd.memory.${EXAMPLE}.sample ${EXAMPLE}.cpp)
+ENDFOREACH()
