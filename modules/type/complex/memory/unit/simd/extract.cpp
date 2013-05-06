@@ -20,7 +20,7 @@
 #include <nt2/sdk/unit/tests/relation.hpp>
 #include <nt2/sdk/unit/tests/type_expr.hpp>
 
-NT2_TEST_CASE_TPL(complex, BOOST_SIMD_REAL_TYPES)
+NT2_TEST_CASE_TPL(complex, BOOST_SIMD_SIMD_REAL_TYPES)
 {
   using std::complex;
   using nt2::extract;
@@ -48,7 +48,7 @@ NT2_TEST_CASE_TPL(complex, BOOST_SIMD_REAL_TYPES)
   }
 }
 
-NT2_TEST_CASE_TPL(dry, BOOST_SIMD_REAL_TYPES)
+NT2_TEST_CASE_TPL(dry, BOOST_SIMD_SIMD_REAL_TYPES)
 {
   using nt2::dry;
   using nt2::extract;
@@ -76,7 +76,7 @@ NT2_TEST_CASE_TPL(dry, BOOST_SIMD_REAL_TYPES)
   }
 }
 
-NT2_TEST_CASE_TPL(imaginary, BOOST_SIMD_REAL_TYPES)
+NT2_TEST_CASE_TPL(imaginary, BOOST_SIMD_SIMD_REAL_TYPES)
 {
   using nt2::imaginary;
   using nt2::extract;

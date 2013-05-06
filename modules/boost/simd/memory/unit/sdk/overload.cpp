@@ -13,7 +13,7 @@
 #include <nt2/sdk/unit/tests/basic.hpp>
 #include <nt2/sdk/unit/tests/relation.hpp>
 
-class foo : public boost::simd::aligned_object<64>
+class foo : public boost::simd::aligned_object<16>
 {
   public:
   int  member;
@@ -28,7 +28,7 @@ NT2_TEST_CASE(overload_new_delete)
 
   foo* ptr = new foo;
 
-  NT2_TEST( is_aligned(ptr,64) );
+  NT2_TEST( is_aligned(ptr,16) );
   ptr->member = 42;
   NT2_TEST_EQUAL( ptr->member, 42 );
   delete ptr;
@@ -43,7 +43,7 @@ NT2_TEST_CASE(overload_new_delete_array)
 
   foo* ptr = new foo[5];
 
-  NT2_TEST( is_aligned(ptr,64) );
+  NT2_TEST( is_aligned(ptr,16) );
 
   for(int i=0;i<5;++i) ptr[i].member = 10*i;
   for(int i=0;i<5;++i) NT2_TEST_EQUAL( ptr[i].member, 10*i );
