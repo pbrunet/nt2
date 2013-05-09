@@ -15,6 +15,7 @@
 #include <nt2/include/functions/ndims.hpp>
 #include <nt2/include/functions/value.hpp>
 #include <nt2/core/container/dsl/size.hpp>
+#include <nt2/core/container/dsl/details/raw.hpp>
 #include <nt2/sdk/memory/category.hpp>
 #include <boost/proto/traits.hpp>
 #include <boost/assert.hpp>
@@ -195,8 +196,8 @@ namespace nt2 { namespace ext
       nt2_la_int ldb = at_c<0>(child1.extent());
       nt2_la_int ldc = at_c<0>(a1.extent());
 
-      if(    ( raw(value(result)) >= child0.raw()+numel(child0) || raw(value(result))+numel(result) <  child0.raw())&&
-             ( raw(value(result)) >= child1.raw()+numel(child0) || raw(value(result))+numel(result) <  child1.raw()))
+      if(    ( details::raw(value(result)) >= child0.raw()+numel(child0) || details::raw(value(result))+numel(result) <  child0.raw())&&
+             ( details::raw(value(result)) >= child1.raw()+numel(child0) || details::raw(value(result))+numel(result) <  child1.raw()))
       {
         a0.resize(a1.extent());
         nt2::details::
@@ -206,7 +207,7 @@ namespace nt2 { namespace ext
             , child0.raw(), &lda
             , child1.raw(), &ldb
             , &beta
-            , raw(value(result)), &ldc
+            , details::raw(value(result)), &ldc
             );
         a0 = result;
       }
