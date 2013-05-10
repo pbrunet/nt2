@@ -35,7 +35,7 @@ namespace nt2 { namespace meta
     typedef typename meta::call<Functor(meta::as_<Base>)>::type   result_type;
 
     template<class Pos, class Size, class Target>
-    BOOST_FORCEINLINE typename Target::type
+    BOOST_FORCEINLINE result_type
     operator()(Pos const&, Size const&, Target const& t) const
     {
       return f_t()(t);
